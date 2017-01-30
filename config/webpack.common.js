@@ -64,7 +64,7 @@ module.exports = {
 
         //automatically inject bundles into index.html
         new HtmlWebpackPlugin({
-            template: 'app/index.html'
+            template: 'index.html'
         })
     ]
 };
