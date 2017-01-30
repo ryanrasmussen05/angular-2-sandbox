@@ -6,9 +6,9 @@ var helpers = require('./helpers');
 module.exports = {
     //bundle these as single files
     entry: {
-        'polyfills': './src/polyfills.ts',
-        'vendor': './src/vendor.ts',
-        'app': './src/main.ts'
+        'polyfills': './app/polyfills.ts',
+        'vendor': './app/vendor.ts',
+        'app': './app/main.ts'
     },
 
     resolve: {
@@ -36,13 +36,13 @@ module.exports = {
             //load application wide styles
             {
                 test: /\.css$/,
-                exclude: helpers.root('src', 'app'),
+                exclude: helpers.root('app'),
                 loader: ExtractTextPlugin.extract({ fallbackLoader: 'style-loader', loader: 'css-loader?sourceMap' })
             },
             //load styles specific to individual components
             {
                 test: /\.css$/,
-                include: helpers.root('src', 'app'),
+                include: helpers.root('app'),
                 loader: 'raw-loader'
             }
         ]
@@ -64,7 +64,7 @@ module.exports = {
 
         //automatically inject bundles into index.html
         new HtmlWebpackPlugin({
-            template: 'src/index.html'
+            template: 'app/index.html'
         })
     ]
 };
