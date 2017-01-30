@@ -17,18 +17,27 @@ module.exports = webpackMerge(commonConfig, {
     },
 
     plugins: [
+        //stop build if there is an error
         new webpack.NoEmitOnErrorsPlugin(),
+
+        //minify bundles
         new webpack.optimize.UglifyJsPlugin({ // https://github.com/angular/angular/issues/10618
             mangle: {
                 keep_fnames: true
             }
         }),
+
+        //extract css to separate files
         new ExtractTextPlugin('[name].[hash].css'),
+
+        //allow running angular in production mode
         new webpack.DefinePlugin({
             'process.env': {
                 'ENV': JSON.stringify(ENV)
             }
         }),
+
+        //overrides options of specified loaders
         new webpack.LoaderOptionsPlugin({
             htmlLoader: {
                 minimize: false // workaround for ng2

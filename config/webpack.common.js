@@ -4,6 +4,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var helpers = require('./helpers');
 
 module.exports = {
+    //bundle these as single files
     entry: {
         'polyfills': './src/polyfills.ts',
         'vendor': './src/vendor.ts',
@@ -16,23 +17,29 @@ module.exports = {
 
     module: {
         rules: [
+            //angular2-template-loader: replace templateUrl and styleUrls with require statements
+            //awesome-typescript-loader: transpiles typescript (faster than ts-loader)
             {
                 test: /\.ts$/,
                 loaders: ['awesome-typescript-loader', 'angular2-template-loader']
             },
+            //html-loader: exports html files as strings
             {
                 test: /\.html$/,
                 loader: 'html-loader'
             },
+            //file-loader: bundle files
             {
                 test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
                 loader: 'file-loader?name=assets/[name].[hash].[ext]'
             },
+            //load application wide styles
             {
                 test: /\.css$/,
                 exclude: helpers.root('src', 'app'),
                 loader: ExtractTextPlugin.extract({ fallbackLoader: 'style-loader', loader: 'css-loader?sourceMap' })
             },
+            //load styles specific to individual components
             {
                 test: /\.css$/,
                 include: helpers.root('src', 'app'),
@@ -50,10 +57,12 @@ module.exports = {
             {} // a map of your routes
         ),
 
+        //make sure dependencies aren't duplicated among bundles
         new webpack.optimize.CommonsChunkPlugin({
             name: ['app', 'vendor', 'polyfills']
         }),
 
+        //automatically inject bundles into index.html
         new HtmlWebpackPlugin({
             template: 'src/index.html'
         })
