@@ -6,9 +6,9 @@ var helpers = require('./helpers');
 module.exports = {
     //bundle these as single files
     entry: {
-        'polyfills': './app/polyfills.ts',
-        'vendor': './app/vendor.ts',
-        'app': './app/main.ts'
+        'polyfills': './src/polyfills.ts',
+        'vendor': './src/vendor.ts',
+        'app': './src/app/main.ts'
     },
 
     resolve: {
@@ -17,6 +17,7 @@ module.exports = {
 
     module: {
         rules: [
+            //run lint on ts files first
             {
                 enforce: 'pre',
                 test: /\.ts$/,
@@ -38,17 +39,18 @@ module.exports = {
                 test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
                 loader: 'file-loader?name=assets/[name].[hash].[ext]'
             },
-            //load application wide styles
+            //raw-loader: load file as string
+            //load styles tied to specific angular component
             {
-                test: /\.css$/,
-                exclude: helpers.root('app'),
-                loader: ExtractTextPlugin.extract({ fallbackLoader: 'style-loader', loader: 'css-loader?sourceMap' })
+                test: /\.less$/,
+                include: helpers.root('src', 'app'),
+                loaders: ['raw-loader', 'less-loader']
             },
-            //load styles specific to individual components
+            //load app wide styles
             {
-                test: /\.css$/,
-                include: helpers.root('app'),
-                loader: 'raw-loader'
+                test: /\.less$/,
+                exclude: helpers.root('src', 'app'),
+                loader: ExtractTextPlugin.extract({loader: 'css-loader?sourceMap!less-loader?sourceMap'})
             }
         ]
     },
@@ -69,7 +71,7 @@ module.exports = {
 
         //automatically inject bundles into index.html
         new HtmlWebpackPlugin({
-            template: 'index.html'
+            template: 'src/index.html'
         })
     ]
 };

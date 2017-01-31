@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import '../styles/styles.less';
+
 @Component({
     selector: 'rr-my-app',
     template: `
@@ -10,7 +12,7 @@ import { Component } from '@angular/core';
     </nav>
     <router-outlet></router-outlet>
   `,
-    styleUrls: ['./app.component.css']
+    styleUrls: ['./app.component.less']
 })
 export class AppComponent {
     title = 'Tour of Heroes';
