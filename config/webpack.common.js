@@ -42,15 +42,15 @@ module.exports = {
             //raw-loader: load file as string
             //load styles tied to specific angular component
             {
-                test: /\.less$/,
+                test: /\.scss$/,
                 include: helpers.root('src', 'app'),
-                loaders: ['raw-loader', 'less-loader']
+                loaders: ['raw-loader', 'sass-loader']
             },
             //load app wide styles
             {
-                test: /\.less$/,
+                test: /\.scss$/,
                 exclude: helpers.root('src', 'app'),
-                loader: ExtractTextPlugin.extract({loader: 'css-loader?sourceMap!less-loader?sourceMap'})
+                loader: ExtractTextPlugin.extract({loader: 'css-loader?sourceMap!sass-loader?sourceMap'})
             }
         ]
     },
