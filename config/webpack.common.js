@@ -72,6 +72,13 @@ module.exports = {
         //automatically inject bundles into index.html
         new HtmlWebpackPlugin({
             template: 'src/index.html'
+        }),
+
+        //allow modules to access jquery
+        new webpack.ProvidePlugin({
+            jQuery: 'jquery',
+            $: 'jquery',
+            jquery: 'jquery'
         })
     ]
 };
