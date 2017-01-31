@@ -17,6 +17,11 @@ module.exports = {
 
     module: {
         rules: [
+            {
+                enforce: 'pre',
+                test: /\.ts$/,
+                loader: 'tslint-loader'
+            },
             //angular2-template-loader: replace templateUrl and styleUrls with require statements
             //awesome-typescript-loader: transpiles typescript (faster than ts-loader)
             {
