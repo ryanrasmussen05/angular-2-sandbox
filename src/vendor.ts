@@ -12,5 +12,8 @@ import 'rxjs';
 //jquery
 import 'jquery';
 
+//semantic
+import '../semantic/dist/semantic.min.js';
+
 // Other vendors for example jQuery, Lodash or Bootstrap
 // You can import js, ts, css, sass, ...

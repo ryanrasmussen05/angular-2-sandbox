@@ -40,17 +40,23 @@ module.exports = {
                 loader: 'file-loader?name=assets/[name].[hash].[ext]'
             },
             //raw-loader: load file as string
-            //load styles tied to specific angular component
+            //load sass styles tied to specific angular component
             {
                 test: /\.scss$/,
                 include: helpers.root('src', 'app'),
                 loaders: ['raw-loader', 'sass-loader']
             },
-            //load app wide styles
+            //load app wide sass styles
             {
                 test: /\.scss$/,
                 exclude: helpers.root('src', 'app'),
                 loader: ExtractTextPlugin.extract({loader: 'css-loader?sourceMap!sass-loader?sourceMap'})
+            },
+            //load global css files (semantic)
+            {
+                test: /\.css$/,
+                exclude: helpers.root('src', 'app'),
+                loader: ExtractTextPlugin.extract({loader: 'css-loader?sourceMap'})
             }
         ]
     },

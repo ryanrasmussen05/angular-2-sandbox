@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import '../styles/styles.scss';
+import '../../semantic/dist/semantic.min.css';
 
 @Component({
     selector: 'rr-my-app',
