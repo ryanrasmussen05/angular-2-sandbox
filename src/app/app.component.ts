@@ -1,7 +1,11 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 
+//custom app-wide styles
 import '../styles/styles.scss';
-import '../../semantic/dist/semantic.min.css';
+//semantic-ui
+import 'semantic-ui-css/semantic.min.css';
+//bass css
+import 'basscss/css/basscss.min.css';
 
 @Component({
     selector: 'rr-my-app',

@@ -13,7 +13,7 @@ import 'rxjs';
 import 'jquery';
 
 //semantic
-import '../semantic/dist/semantic.min.js';
+import 'semantic-ui-css/semantic.js';
 
 // Other vendors for example jQuery, Lodash or Bootstrap
 // You can import js, ts, css, sass, ...
