@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import '../styles/styles.scss';
 import '../../semantic/dist/semantic.min.css';
@@ -12,9 +12,22 @@ import '../../semantic/dist/semantic.min.css';
         <a routerLink="/heroes" routerLinkActive="active">Heroes</a>
     </nav>
     <router-outlet></router-outlet>
+    <div class="ui dropdown">
+  <input type="hidden" name="gender">
+  <i class="dropdown icon"></i>
+  <div class="default text">Gender</div>
+  <div class="menu">
+    <div class="item" data-value="male">Male</div>
+    <div class="item" data-value="female">Female</div>
+  </div>
+</div>
   `,
     styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
     title = 'Tour of Heroes';
+
+    ngOnInit(): void {
+        $('.ui.dropdown').dropdown();
+    }
 }
