@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 
 import '../styles/styles.scss';
 import '../../semantic/dist/semantic.min.css';
@@ -11,7 +11,9 @@ import '../../semantic/dist/semantic.min.css';
 export class AppComponent implements OnInit {
     title = 'Tour of Heroes';
 
-    ngOnInit(): void {
-        $('.ui.dropdown').dropdown();
+    constructor(private el: ElementRef) {}
+
+    ngOnInit() :void {
+        $(this.el.nativeElement).find('.ui.dropdown').dropdown();
     }
 }
