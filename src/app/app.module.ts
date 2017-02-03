@@ -10,6 +10,9 @@ import { DashboardComponent } from './hero-app/dashboard/dashboard.component';
 
 import { HomepageComponent } from './homepage/homepage.component';
 
+//TODO make sandbox its own module
+import { FireworksComponent } from './sandbox/canvas/fireworks/fireworks.component';
+
 import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
@@ -23,7 +26,8 @@ import { AppRoutingModule } from './app-routing.module';
         HeroDetailComponent,
         HeroesComponent,
         DashboardComponent,
-        HomepageComponent
+        HomepageComponent,
+        FireworksComponent
     ],
     providers: [ HeroService ],
     bootstrap: [ AppComponent ]
