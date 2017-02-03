@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component } from '@angular/core';
 
 //custom app-wide styles
 import '../styles/styles.scss';
@@ -12,12 +12,5 @@ import 'basscss/css/basscss.min.css';
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
-    title = 'Tour of Heroes';
-
-    constructor(private el: ElementRef) {}
-
-    ngOnInit() :void {
-        $(this.el.nativeElement).find('.ui.dropdown').dropdown();
-    }
+export class AppComponent {
 }
