@@ -77,6 +77,7 @@ module.exports = {
 
         //automatically inject bundles into index.html
         new HtmlWebpackPlugin({
+            favicon: 'src/public/images/favicon.ico',
             template: 'src/index.html'
         }),
 

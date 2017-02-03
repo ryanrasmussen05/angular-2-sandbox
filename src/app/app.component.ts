@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 
+import '../public/images/favicon.ico';
+
 //custom app-wide styles
-import '../styles/styles.scss';
+import '../public/styles/styles.scss';
 //semantic-ui
 import 'semantic-ui-css/semantic.min.css';
 //bass css
