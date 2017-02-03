@@ -9,8 +9,7 @@ import 'basscss/css/basscss.min.css';
 
 @Component({
     selector: 'rr-my-app',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss']
+    templateUrl: './app.component.html'
 })
 export class AppComponent {
 }
