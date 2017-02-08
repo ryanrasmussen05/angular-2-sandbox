@@ -6,7 +6,7 @@ export class Firework {
     fuseTime: number;
     currentTime: number;
 
-    constructor(public x: number, public y: number, public targetX: number, public targetY: number){
+    constructor(public x: number, public y: number, public targetX: number, public targetY: number, public xRange: number){
         this.coordinates = [];
         this.coordinates.push([x, y]);
 
@@ -29,7 +29,7 @@ export class Firework {
         this.currentTime++;
 
         //blow up if fuse timer runs out, or near edges
-        if(this.fuseTime <= this.currentTime || this.x < 50 || this.x > 500 - 50 || this.y < 50) {
+        if(this.fuseTime <= this.currentTime || this.x < 50 || this.x > this.xRange - 50 || this.y < 50) {
             return true;
         } else {
             this.x += this.vx;

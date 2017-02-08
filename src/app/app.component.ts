@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 
 import '../public/images/favicon.ico';
 
-//custom app-wide styles
-import '../public/styles/styles.scss';
 //semantic-ui
 import 'semantic-ui-css/semantic.min.css';
 //bass css
 import 'basscss/css/basscss.min.css';
+//custom app-wide styles
+import '../public/styles/styles.scss';
 
 @Component({
     selector: 'rr-my-app',

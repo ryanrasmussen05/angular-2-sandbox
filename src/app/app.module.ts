@@ -8,6 +8,7 @@ import { HeroesComponent } from './hero-app/heroes/heroes.component';
 import { HeroService } from './hero-app/hero/hero.service';
 import { DashboardComponent } from './hero-app/dashboard/dashboard.component';
 
+import { NavigationMenuComponent } from './navigation-menu/navigation-menu.component';
 import { HomepageComponent } from './homepage/homepage.component';
 
 //TODO make sandbox its own module
@@ -26,6 +27,7 @@ import { AppRoutingModule } from './app-routing.module';
         HeroDetailComponent,
         HeroesComponent,
         DashboardComponent,
+        NavigationMenuComponent,
         HomepageComponent,
         FireworksComponent
     ],

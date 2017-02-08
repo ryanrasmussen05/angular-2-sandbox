@@ -1,16 +1,22 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef, ViewChild } from '@angular/core';
 
 import { Firework } from "./firework";
 import { Particle } from "./particle";
 
 @Component({
     selector: 'rr-fireworks',
-    templateUrl: './fireworks.component.html'
+    templateUrl: './fireworks.component.html',
+    styleUrls: ['./fireworks.component.scss']
 })
 
 export class FireworksComponent implements OnInit, OnDestroy {
+    @ViewChild('canvas') canvasElement: ElementRef;
+
     canvas: HTMLCanvasElement;
     ctx: CanvasRenderingContext2D;
+
+    screenWidth: number;
+    screenHeight: number;
 
     fireworks: Firework[];
     particles: Particle[];
@@ -27,6 +33,8 @@ export class FireworksComponent implements OnInit, OnDestroy {
 
     intervalId: number;
 
+    constructor(public el: ElementRef){}
+
     ngOnInit(): void {
         this.fireworks = [];
         this.particles = [];
@@ -37,13 +45,18 @@ export class FireworksComponent implements OnInit, OnDestroy {
         this.limiterTick = 0;
         this.limiterTotal = 5;
 
-        this.canvas = <HTMLCanvasElement>document.getElementById('canvas');
+        this.canvas = this.canvasElement.nativeElement;
         this.ctx = this.canvas.getContext('2d');
         this.addMouseListeners();
 
+        this.screenWidth = this.el.nativeElement.offsetWidth;
+        this.screenHeight = this.el.nativeElement.offsetHeight;
+        this.canvas.width = this.screenWidth;
+        this.canvas.height = this.screenHeight;
+
         this.intervalId = window.setInterval(() => {
             this.draw();
-        }, 16);
+        }, 25);
     }
 
     ngOnDestroy(): void {
@@ -74,7 +87,7 @@ export class FireworksComponent implements OnInit, OnDestroy {
 
         this.ctx.globalCompositeOperation = 'source-over';
         this.ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
-        this.ctx.fillRect(0, 0, 500, 500);
+        this.ctx.fillRect(0, 0, this.screenWidth, this.screenHeight);
         this.ctx.globalCompositeOperation = 'lighter';
 
         let fireworksToRemove: number[] = [];
@@ -109,7 +122,9 @@ export class FireworksComponent implements OnInit, OnDestroy {
 
         if(this.timerTick >= this.timerTotal) {
             if(!this.mouseDown) {
-                this.fireworks.push(new Firework(500/2, 500, this.getRange(500/3, 2*500/3), this.getRange(0, 500/2)));
+                this.fireworks.push(new Firework(this.screenWidth/2, this.screenHeight,
+                    this.getRange(this.screenWidth / 3, 2 * this.screenWidth / 3), this.getRange(0, this.screenHeight / 2),
+                    this.screenWidth));
                 this.timerTick = 0;
             }
         } else {
@@ -118,7 +133,8 @@ export class FireworksComponent implements OnInit, OnDestroy {
 
         if(this.limiterTick >= this.limiterTotal) {
             if(this.mouseDown) {
-                this.fireworks.push(new Firework(500/2, 500, this.mouseX, this.mouseY));
+                this.fireworks.push(new Firework(this.screenWidth / 2, this.screenHeight,
+                    this.mouseX, this.mouseY, this.screenWidth));
                 this.limiterTick = 0;
             }
         } else {

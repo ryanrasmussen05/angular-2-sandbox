@@ -1,5 +1,11 @@
-html {
-    body {
-        background: teal url("../images/angular.png") center no-repeat;
-    }
+.full-width {
+  width: 100%;
+}
+
+.full-height {
+  height: 100%;
+}
+
+canvas {
+  display: block;
 }
