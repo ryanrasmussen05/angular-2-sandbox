@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AndroidApp } from "../static-content/interface/android-app";
-import { StaticContentService } from "../static-content/static-content.service";
+import { AndroidApp } from '../static-content/interface/android-app';
+import { StaticContentService } from '../static-content/static-content.service';
 
 @Component({
     selector: 'rr-homepage',
