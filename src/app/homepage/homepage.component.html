@@ -18,7 +18,7 @@
     <h2 class="ui header">About</h2>
     <div class="mb2">
         I am a full-stack web developer and an Android developer in my spare time.  I built this site using
-        <span class="bold">Angular 2</span>, <span class="bold">Semantic UI</span>, <span class="bold">Basscss</span>, and <span class="bold">Webpack</span>
+        <span class="bold">Angular 2 with TypeScript</span>, <span class="bold">Semantic UI</span>, <span class="bold">Basscss</span>, and <span class="bold">Webpack</span>
          as a way to stay up-to-date on the latest browser technologies, and as a sandbox for learning to use various libraries.
     </div>
     <a class="ui button" routerLink="/resume">Resume</a>
@@ -31,32 +31,18 @@
 <div class="ui text container mt3">
     <h2 class="ui header">Android Development</h2>
     <div class="mb2">
-        I publish apps to Google Play under the developer name <span class="bold">Rhino Development</span>
+        I publish apps to Google Play under the developer name <span class="bold">Rhino Development</span>.
         I currently have two apps in the store, and a custom Asteroids game that I hope to publish soon.
     </div>
     <div class="ui items mt4">
-        <div class="item mt3 mb0">
-            <a class="ui image small" href="https://play.google.com/store/apps/details?id=com.rhino.sacsphero" target="_blank">
-                <img src="../../public/images/sac.png">
+        <div class="item mt3 mb0" *ngFor="let androidApp of androidApps">
+            <a class="ui image small" href="{{androidApp.url}}" target="_blank">
+                <img [src]="getImage(androidApp.image)">
             </a>
             <div class="content">
-                <a class="header" href="https://play.google.com/store/apps/details?id=com.rhino.sacsphero" target="_blank">SAC Sphero Labyrinth</a>
+                <a class="header" href="{{androidApp.url}}" target="_blank">{{androidApp.title}}</a>
                 <div class="description">
-                    <p>I wrote this app for the Strategic Air Command & Aerospace Museum to use for education purposes.  The app connects
-                    to a Sphero robot via bluetooth, and allows the user to send direction commands to navigate the Sphero through a maze.</p>
-                </div>
-            </div>
-        </div>
-        <div class="item mt3 mb0">
-            <a class="ui image small" href="https://play.google.com/store/apps/details?id=com.rhino.foscam" target="_blank">
-                <img src="../../public/images/foscam.png">
-            </a>
-            <div class="content">
-                <a class="header" href="https://play.google.com/store/apps/details?id=com.rhino.foscam" target="_blank">Foscam Control Center</a>
-                <div class="description">
-                    <p>My first attempt at a full featured Android application, I wrote Foscam Control Center to control older model Foscam IP Cameras
-                    because I found the other available Android applications clunky and hard to use.  This was a successful app for older model Foscams when
-                    it I wrote it several years ago, but with many new models coming out, this app is more or less obsolete, and no longer being maintained.</p>
+                    <p>{{androidApp.description}}</p>
                 </div>
             </div>
         </div>

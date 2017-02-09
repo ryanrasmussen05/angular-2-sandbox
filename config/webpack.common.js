@@ -36,7 +36,7 @@ module.exports = {
             },
             //file-loader: bundle files
             {
-                test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
+                test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico|json)$/,
                 loader: 'file-loader?name=assets/[name].[hash].[ext]'
             },
             //raw-loader: load file as string

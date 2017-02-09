@@ -1,6 +1,7 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
+import { HttpModule } from '@angular/http';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -11,11 +12,13 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { NavigationMenuComponent } from './navigation-menu/navigation-menu.component';
 import { ResumeComponent } from './resume/resume.component';
 import { SandboxComponent } from './sandbox/sandbox.component';
+import { StaticContentService } from './static-content/static-content.service';
 
 @NgModule({
     imports: [
         BrowserModule,
         FormsModule,
+        HttpModule,
         AppRoutingModule
     ],
     declarations: [
@@ -27,6 +30,7 @@ import { SandboxComponent } from './sandbox/sandbox.component';
         ResumeComponent,
         SandboxComponent
     ],
+    providers: [ StaticContentService ],
     bootstrap: [ AppComponent ]
 })
 

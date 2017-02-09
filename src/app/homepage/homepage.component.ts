@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
+import { AndroidApp } from "../static-content/interface/android-app";
+import { StaticContentService } from "../static-content/static-content.service";
 
 @Component({
     selector: 'rr-homepage',
@@ -6,5 +9,17 @@ import { Component } from '@angular/core';
     styleUrls: ['./homepage.component.scss']
 })
 
-export class HomepageComponent {
+export class HomepageComponent implements OnInit {
+    androidApps: AndroidApp[];
+
+    constructor(private staticContentService: StaticContentService){}
+
+    ngOnInit() {
+        this.staticContentService.getAndroidApps()
+            .then(androidApps => this.androidApps = androidApps);
+    }
+
+    getImage(imageName: string) {
+        return require('../../public/images/' + imageName);
+    }
 }
