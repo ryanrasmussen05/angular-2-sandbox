@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnDestroy, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 
 import { Firework } from "./firework";
 import { Particle } from "./particle";
@@ -9,7 +9,7 @@ import { Particle } from "./particle";
     styleUrls: ['./fireworks.component.scss']
 })
 
-export class FireworksComponent implements OnInit, OnDestroy {
+export class FireworksComponent implements AfterViewInit, OnDestroy {
     @ViewChild('canvas') canvasElement: ElementRef;
 
     canvas: HTMLCanvasElement;
@@ -35,7 +35,7 @@ export class FireworksComponent implements OnInit, OnDestroy {
 
     constructor(public el: ElementRef){}
 
-    ngOnInit(): void {
+    ngAfterViewInit(): void {
         this.fireworks = [];
         this.particles = [];
         this.hue = 120;

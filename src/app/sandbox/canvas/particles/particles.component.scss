@@ -1,0 +1,10 @@
+@import '../../../../public/styles/mixins';
+
+:host {
+  @include flex-auto();
+  @include flex();
+}
+
+.button-bar {
+  margin: 0.2rem;
+}

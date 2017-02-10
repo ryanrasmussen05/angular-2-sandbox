@@ -10,6 +10,7 @@ import { FireworksComponent } from './sandbox/canvas/fireworks/fireworks.compone
 import { FooterComponent } from './footer/footer.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { NavigationMenuComponent } from './navigation-menu/navigation-menu.component';
+import { ParticlesComponent } from './sandbox/canvas/particles/particles.component';
 import { ResumeComponent } from './resume/resume.component';
 import { SandboxComponent } from './sandbox/sandbox.component';
 import { StaticContentService } from './static-content/static-content.service';
@@ -27,6 +28,7 @@ import { StaticContentService } from './static-content/static-content.service';
         FooterComponent,
         HomepageComponent,
         NavigationMenuComponent,
+        ParticlesComponent,
         ResumeComponent,
         SandboxComponent
     ],
