@@ -39,9 +39,14 @@ export class Firework {
     }
 
     draw(ctx: CanvasRenderingContext2D, hue: number): void {
+        let moveToX = Math.floor(this.coordinates[this.coordinates.length - 1][0]);
+        let moveToY = Math.floor(this.coordinates[this.coordinates.length - 1][1]);
+        let lineToX = Math.floor(this.x);
+        let lineToY = Math.floor(this.y);
+
         ctx.beginPath();
-        ctx.moveTo(this.coordinates[this.coordinates.length - 1][0], this.coordinates[this.coordinates.length - 1][1]);
-        ctx.lineTo(this.x, this.y);
+        ctx.moveTo(moveToX, moveToY);
+        ctx.lineTo(lineToX, lineToY);
         ctx.strokeStyle = 'hsl(' + hue + ',100%,' + this.brightness + '%';
         ctx.stroke();
     }
