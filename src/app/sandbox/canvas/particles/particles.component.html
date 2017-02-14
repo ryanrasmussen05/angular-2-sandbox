@@ -1,21 +1,26 @@
 <div class="flex-auto flex flex-column">
-    <div class="button-bar flex-none">
-        <div class="ui button" [class.blue]="gravity" [class.red]="!gravity" (click)="toggleGravity()">
-            Turn Gravity {{gravity ? 'Off' : 'On'}}
-        </div>
-        <div class="ui button" [class.blue]="collisions" [class.red]="!collisions" (click)="toggleCollisions()">
-            Turn Collisions {{collisions ? 'Off' : 'On'}}
-        </div>
-        <div class="ui selection dropdown">
-            {{orbs + " Orbs"}}
-            <i class="dropdown icon"></i>
-            <div class="menu">
-                <div class="item" (click)="setOrbs(10)">10 Orbs</div>
-                <div class="item" (click)="setOrbs(20)">20 Orbs</div>
-                <div class="item" (click)="setOrbs(30)">30 Orbs</div>
-                <div class="item" (click)="setOrbs(40)">40 Orbs</div>
-                <div class="item" (click)="setOrbs(50)">50 Orbs</div>
+    <div class="button-bar flex-none flex items-center">
+        <div class="flex-auto">
+            <div class="ui button" [class.blue]="gravity" [class.red]="!gravity" (click)="toggleGravity()">
+                Turn Gravity {{gravity ? 'Off' : 'On'}}
             </div>
+            <div class="ui button" [class.blue]="collisions" [class.red]="!collisions" (click)="toggleCollisions()">
+                Turn Collisions {{collisions ? 'Off' : 'On'}}
+            </div>
+            <div class="ui selection dropdown">
+                {{orbs + " Orbs"}}
+                <i class="dropdown icon"></i>
+                <div class="menu">
+                    <div class="item" (click)="setOrbs(10)">10 Orbs</div>
+                    <div class="item" (click)="setOrbs(20)">20 Orbs</div>
+                    <div class="item" (click)="setOrbs(30)">30 Orbs</div>
+                    <div class="item" (click)="setOrbs(40)">40 Orbs</div>
+                    <div class="item" (click)="setOrbs(50)">50 Orbs</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex-none">
+            <rr-info-box [title]="infoBoxTitle" [body]="infoBoxBody"></rr-info-box>
         </div>
     </div>
     <div #canvasWrapper class="flex-auto">

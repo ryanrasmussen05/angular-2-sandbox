@@ -33,6 +33,11 @@ export class FireworksComponent implements AfterViewInit, OnDestroy {
 
     intervalId: number;
 
+    infoBoxTitle: string = "HTML Canvas Fireworks";
+    infoBoxBody: string = `This is a fireworks animation created with a standard HTML Canvas.  Fireworks
+                            launch in random direction at a set interval, or you can click anywhere on the 
+                            screen to launch new fireworks more rapidly`;
+
     constructor(public el: ElementRef){}
 
     ngAfterViewInit(): void {

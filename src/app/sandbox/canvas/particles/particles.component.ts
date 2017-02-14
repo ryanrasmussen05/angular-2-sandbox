@@ -31,6 +31,11 @@ export class ParticlesComponent implements AfterViewInit, OnDestroy {
 
     intervalId: number;
 
+    infoBoxTitle: string = "HTML Canvas Particles";
+    infoBoxBody: string = `Free floating particles created with a standard HTML Canvas.  Collision reactions are calculated
+                            using a collision normal vector and mass based on two dimensional area.  When gravity is enabled, 
+                            a small amount of kinetic energy is lost after a collision to create a more realistic effect.`;
+
     ngAfterViewInit(): void {
         $('.ui.dropdown').dropdown();
 
@@ -143,6 +148,7 @@ export class ParticlesComponent implements AfterViewInit, OnDestroy {
     setOrbs(orbs: number): void {
         clearInterval(this.intervalId);
         this.orbs = orbs;
+        this.particles = [];
         this.initCanvas();
     }
 }
