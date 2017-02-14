@@ -14,6 +14,13 @@ export class MontyHallComponent implements OnInit {
     gameState: string;
     finishText: string;
 
+    runningTest: boolean;
+    numberTests: number = 100;
+    testSpeed: number = 2;
+    testOutputs: string[];
+    winners: number;
+    losers: number;
+
     ngOnInit(): void {
         this.initializeGame();
     }
@@ -24,6 +31,8 @@ export class MontyHallComponent implements OnInit {
         this.selectedDoor = undefined;
         this.finishText = "";
         this.gameState = 'initial';
+        this.runningTest = false;
+        this.testOutputs = [];
     }
 
     getRandomWinner(): void {
@@ -95,6 +104,56 @@ export class MontyHallComponent implements OnInit {
         if(this.winningDoor) {
             return require('../../../public/images/' + (doorNumber ===  this.winningDoor ? 'money.png' : 'donkey.png'));
         }
+    }
+
+    initializeTests(shouldSwitch: boolean): void {
+        if(!this.runningTest) {
+            this.testOutputs = [];
+            this.winners = 0;
+            this.losers = 0;
+            this.runTest(shouldSwitch, 1);
+        }
+    }
+
+    private runTest(shouldSwitch: boolean, testNumber: number): void {
+        this.runningTest = true;
+
+        if(testNumber > this.numberTests) {
+            //all tests completed
+            this.runningTest = false;
+            this.gameState = 'testCompleted';
+            return;
+        }
+
+        this.getRandomWinner();
+        this.openDoors = [];
+        this.gameState = 'initial';
+        this.selectedDoor = null;
+
+        let randomSelection = Math.floor(Math.random() * 3) + 1;
+        this.doorClick(randomSelection);
+
+        setTimeout(() => {
+            this.openRandomLoser();
+            setTimeout(() => {
+                this.switchDoor(shouldSwitch);
+                setTimeout(() => {
+                    this.finishGame();
+
+                    let win = this.selectedDoor === this.winningDoor;
+
+                    if(win) {
+                        this.winners++;
+                        this.testOutputs.push("win");
+                    } else {
+                        this.losers++;
+                        this.testOutputs.push("lose");
+                    }
+
+                    this.runTest(shouldSwitch, ++testNumber);
+                }, this.testSpeed);
+            }, this.testSpeed);
+        }, this.testSpeed);
     }
 
     private openDoor(doorNumber: number): void {

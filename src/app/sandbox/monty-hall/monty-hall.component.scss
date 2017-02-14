@@ -19,3 +19,15 @@
     box-shadow: orange 0 0 11px 5px;
   }
 }
+
+.test-output {
+  font-size: 2em;
+
+  &.win {
+    color: green;
+  }
+
+  &.lose {
+    color: red;
+  }
+}

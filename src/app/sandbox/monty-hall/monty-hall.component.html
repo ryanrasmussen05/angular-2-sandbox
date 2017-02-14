@@ -1,6 +1,6 @@
 <div class="ui segment container mt2 clearfix">
-    <div class="ui blue button">Run 'Stick' Test</div>
-    <div class="ui blue button">Run 'Switch' Test</div>
+    <div class="ui blue button" (click)="initializeTests(false)">Run 'Stick' Test</div>
+    <div class="ui blue button" (click)="initializeTests(true)">Run 'Switch' Test</div>
     <div class="ui red button right" (click)="initializeGame()">Reset</div>
 </div>
 
@@ -35,7 +35,7 @@
     </div>
 </div>
 
-<div class="ui center aligned container mt2">
+<div class="ui center aligned container mt3" *ngIf="!runningTest">
     <span class="ui header" *ngIf="gameState === 'initial'">
         Choose a door
     </span>
@@ -53,7 +53,19 @@
     <div class="ui button blue" (click)="finishGame()" *ngIf="gameState === 'reveal'">
         Reveal
     </div>
-    <span clas="ui header" *ngIf="gameState === 'gameOver'">
+    <span class="ui header" *ngIf="gameState === 'gameOver'">
         {{ finishText }}
     </span>
+    <div *ngIf="gameState === 'testCompleted'">
+        <span class="ui header mr3">
+            {{ 'Won: ' + winners }}
+        </span>
+            <span class="ui header">
+            {{ 'Lost: ' + losers }}
+        </span>
+    </div>
+</div>
+
+<div class="ui container mt3">
+    <span class="test-output inline-block mr2 mb2 {{result}}" *ngFor="let result of testOutputs">{{result | uppercase}}</span>
 </div>
