@@ -11,6 +11,11 @@ declare let Physics: any;
 export class CarSimComponent implements AfterViewInit {
     @ViewChild('physics') physicsElement: ElementRef;
 
+    infoBoxTitle: string = "Physics JS Car Sim";
+    infoBoxBody: string = `Physics JS allows for the creation of custom behaviors.  I wanted to experiment
+                            with creating a car simulation, so I created an "Angular Acceleration" (aka torque)
+                            behavior to apply to wheels of a car.`;
+
     ngAfterViewInit() {
         Physics.behavior('torque', function(parent: any) {
 

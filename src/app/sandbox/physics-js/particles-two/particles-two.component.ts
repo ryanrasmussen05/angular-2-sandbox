@@ -11,6 +11,11 @@ declare let Physics: any;
 export class ParticlesTwoComponent implements AfterViewInit {
     @ViewChild('physics') physicsElement: ElementRef;
 
+    infoBoxTitle: string = "Physics JS Particles";
+    infoBoxBody: string = `A Physics JS implementation of the HTML Canvas Particles I created 
+                            while learning about canvas.  There are no special interactions available
+                            in this implementation.`;
+
     ngAfterViewInit() {
         this.draw();
     }

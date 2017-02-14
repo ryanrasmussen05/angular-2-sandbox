@@ -12,6 +12,12 @@ export class SolarSystemComponent implements AfterViewInit {
     @ViewChild('physics') physicsElement: ElementRef;
     bodies: number = 0;
 
+    infoBoxTitle: string = "Physics JS Solar System";
+    infoBoxBody: string = `I created this to experiment with the "Newtonian" behavior of the 
+                           Physics JS library.  The idea is to model the formation of a solar system,
+                           with hundreds of small bodies orbiting a central start, and merging to form
+                           larger planets`;
+
     constructor(private zone: NgZone) {}
 
     ngAfterViewInit() {

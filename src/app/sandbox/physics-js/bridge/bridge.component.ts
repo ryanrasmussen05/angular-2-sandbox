@@ -11,6 +11,12 @@ declare let Physics: any;
 export class BridgeComponent implements AfterViewInit {
     @ViewChild('physics') physicsElement: ElementRef;
 
+    infoBoxTitle: string = "Physics JS Bridge";
+    infoBoxBody: string = `Built to demostrate the "Verlet Constraints" capability of
+                            Physics JS, the bridge will break if too much force acts on it.
+                            Clicking the mouse anywhere on the screen will generate a force 
+                            pulling the bridge towards it.`;
+
     ngAfterViewInit() {
         this.draw();
     }

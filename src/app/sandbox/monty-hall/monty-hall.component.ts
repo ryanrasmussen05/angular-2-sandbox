@@ -21,6 +21,12 @@ export class MontyHallComponent implements OnInit {
     winners: number;
     losers: number;
 
+    infoBoxTitle: string = "Monty Hall Problem";
+    infoBoxBody: string = `This tests the idea that in the Monty Hall 3 Doors Game, it is always to your 
+                            advantage to switch doors rather than to stick to the original.  You can play through the 
+                            game by clicking the button, or click one of the "Run Tests" buttons to run 100 quick
+                            simulations by always "Sticking" to the original choice, or "Switching" to the other choice.`;
+
     ngOnInit(): void {
         this.initializeGame();
     }

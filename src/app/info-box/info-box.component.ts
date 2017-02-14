@@ -12,7 +12,8 @@ export class InfoBoxComponent {
 
     @ViewChild('modal') modalElement: ElementRef;
 
-    @HostListener('click') onClick() {
+    @HostListener('click', ['$event']) onClick(event: MouseEvent) {
+        event.preventDefault();
         $(this.modalElement.nativeElement).modal('show');
     }
 }

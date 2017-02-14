@@ -11,6 +11,11 @@ declare let Physics: any;
 export class PhysicsIntroComponent implements AfterViewInit {
     @ViewChild('physics') physicsElement: ElementRef;
 
+    infoBoxTitle: string = "Physics JS Intro";
+    infoBoxBody: string = `Basic demo of the usage of Physics JS.  Clicking the mouse at any
+                            point on the screen creates an "attractor" that acts like a center 
+                            of gravity to pull particles in.`;
+
     ngAfterViewInit() {
         this.draw();
     }
