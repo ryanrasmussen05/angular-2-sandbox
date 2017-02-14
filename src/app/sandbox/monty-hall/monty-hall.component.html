@@ -1,3 +1,59 @@
-<div>
-    monty hall
+<div class="ui segment container mt2 clearfix">
+    <div class="ui blue button">Run 'Stick' Test</div>
+    <div class="ui blue button">Run 'Switch' Test</div>
+    <div class="ui red button right" (click)="initializeGame()">Reset</div>
+</div>
+
+<div class="ui center aligned large header">
+    Monty Hall Paradox
+</div>
+
+<div class="ui three column grid container pt2">
+    <div class="column center aligned">
+        <div class="door inline-block relative" [class.open]="isDoorOpen(1)" [class.selected]="selectedDoor === 1" (click)="doorClick(1)">
+            <img class="ui small image" [src]="getImage(1)">
+            <div class="cover absolute top-0 right-0 bottom-0 left-0 flex items-center justify-center">
+                1
+            </div>
+        </div>
+    </div>
+    <div class="column center aligned">
+        <div class="door inline-block relative" [class.open]="isDoorOpen(2)" [class.selected]="selectedDoor === 2" (click)="doorClick(2)">
+            <img class="ui small image" [src]="getImage(2)">
+            <div class="cover absolute top-0 right-0 bottom-0 left-0 flex items-center justify-center">
+                2
+            </div>
+        </div>
+    </div>
+    <div class="column center aligned">
+        <div class="door inline-block relative" [class.open]="isDoorOpen(3)" [class.selected]="selectedDoor === 3" (click)="doorClick(3)">
+            <img class="ui small image" [src]="getImage(3)">
+            <div class="cover absolute top-0 right-0 bottom-0 left-0 flex items-center justify-center">
+                3
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ui center aligned container mt2">
+    <span class="ui header" *ngIf="gameState === 'initial'">
+        Choose a door
+    </span>
+    <div class="ui button blue" (click)="openRandomLoser()" *ngIf="gameState === 'openLoser'">
+        Open A Losing Door
+    </div>
+    <div *ngIf="gameState === 'stickOrSwitch'">
+        <div class="ui button blue" (click)="switchDoor(false)">
+            {{ 'Stick With Door ' + selectedDoor }}
+        </div>
+        <div class="ui button blue" (click)="switchDoor(true)">
+            {{ 'Switch To Door ' + getOtherAvailableDoor() }}
+        </div>
+    </div>
+    <div class="ui button blue" (click)="finishGame()" *ngIf="gameState === 'reveal'">
+        Reveal
+    </div>
+    <span clas="ui header" *ngIf="gameState === 'gameOver'">
+        {{ finishText }}
+    </span>
 </div>

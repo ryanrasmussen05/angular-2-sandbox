@@ -40,11 +40,12 @@ module.exports = {
                 loader: 'file-loader?name=assets/[name].[hash].[ext]'
             },
             //raw-loader: load file as string
+            //can't use raw loader because css loader resolves image urls, but does not spit out css string like sass loader does
             //load sass styles tied to specific angular component
             {
                 test: /\.scss$/,
                 include: helpers.root('src', 'app'),
-                loaders: ['raw-loader', 'sass-loader']
+                loaders: ['exports-loader?module.exports.toString()', 'css-loader', 'sass-loader?sourceMap']
             },
             //load app wide sass styles
             {

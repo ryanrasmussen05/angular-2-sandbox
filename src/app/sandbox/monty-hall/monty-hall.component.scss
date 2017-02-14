@@ -1,0 +1,21 @@
+.door {
+  cursor: pointer;
+
+  .cover {
+    background-color: #2e3dff;
+    color: white;
+    font-size: 60px;
+  }
+
+  &.open {
+    cursor: default;
+
+    .cover {
+      display: none!important;
+    }
+  }
+
+  &.selected {
+    box-shadow: orange 0 0 11px 5px;
+  }
+}
