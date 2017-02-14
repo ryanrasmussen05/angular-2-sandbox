@@ -1,13 +1,51 @@
-<div>
-    this is the sandbox page
+<div class="ui container mt3">
+    <h1 class="ui center aligned header">
+        <i class="lab icon"></i>
+        Sandbox
+    </h1>
 </div>
-<div class="ui bulleted list">
-    <a class="item" routerLink="/sandbox/fireworks">Fireworks</a>
-    <a class="item" routerLink="/sandbox/particles">Particles</a>
-    <a class="item" routerLink="/sandbox/physicsIntro">PhysicsJS Intro</a>
-    <a class="item" routerLink="/sandbox/particlesTwo">Particles Two</a>
-    <a class="item" routerLink="/sandbox/solarSystem">Solar System</a>
-    <a class="item" routerLink="/sandbox/bridge">Bridge</a>
-    <a class="item" routerLink="/sandbox/carSim">Angular Acceleration</a>
-    <a class="item" routerLink="/sandbox/montyHall">Monty Hall</a>
+
+<div class="ui text container mt3 mb4 pb4">
+    <div class="ui divided items">
+        <div class="item py3">
+            <a class="ui small image self-center" href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API" target="_blank">
+                <img src="../../public/images/html5.png">
+            </a>
+            <div class="content ml2">
+                <a class="header" href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API" target="_blank">HTML Canvas</a>
+                <div class="ui large bulleted list">
+                    <a class="item" routerLink="/sandbox/fireworks">Fireworks</a>
+                    <a class="item" routerLink="/sandbox/particles">Particles</a>
+                </div>
+            </div>
+        </div>
+        <div class="item py3">
+            <a class="ui small image self-center" href="http://wellcaffeinated.net/PhysicsJS/" target="_blank">
+                <img src="../../public/images/physicsjs.png">
+            </a>
+            <div class="content ml2">
+                <a class="header" href="http://wellcaffeinated.net/PhysicsJS/" target="_blank">Physics JS</a>
+                <div class="ui large bulleted list">
+                    <a class="item" routerLink="/sandbox/physicsIntro">PhysicsJS Intro</a>
+                    <a class="item" routerLink="/sandbox/particlesTwo">Particles Two</a>
+                    <a class="item" routerLink="/sandbox/solarSystem">Solar System</a>
+                    <a class="item" routerLink="/sandbox/bridge">Bridge</a>
+                    <a class="item" routerLink="/sandbox/carSim">Angular Acceleration</a>
+                </div>
+            </div>
+        </div>
+        <div class="item py3">
+            <div class="ui small image self-center">
+                <img src="../../public/images/other-development.png">
+            </div>
+            <div class="content ml2">
+                <div class="header">Other Development</div>
+                <div class="ui large bulleted list">
+                    <a class="item" routerLink="/sandbox/montyHall">Monty Hall Paradox</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<rr-footer></rr-footer>
