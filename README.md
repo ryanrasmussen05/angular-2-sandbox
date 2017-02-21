@@ -11,3 +11,9 @@
 
 ##Build for Deployment *(/dist folder)*:
 * npm run build
+
+
+##Deploy to Firebase
+* npm install -g firebase-tools
+* firebase login
+* firebase deploy
