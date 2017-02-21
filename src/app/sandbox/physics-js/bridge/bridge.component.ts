@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 
 declare let Physics: any;
 
@@ -8,8 +8,9 @@ declare let Physics: any;
     styleUrls: ['./bridge.component.scss']
 })
 
-export class BridgeComponent implements AfterViewInit {
+export class BridgeComponent implements AfterViewInit, OnDestroy {
     @ViewChild('physics') physicsElement: ElementRef;
+    world: any;
 
     infoBoxTitle: string = "Physics JS Bridge";
     infoBoxBody: string = `Built to demostrate the "Verlet Constraints" capability of
@@ -17,11 +18,17 @@ export class BridgeComponent implements AfterViewInit {
                             Clicking the mouse anywhere on the screen will generate a force 
                             pulling the bridge towards it.`;
 
-    ngAfterViewInit() {
+    ngAfterViewInit():void {
         this.draw();
     }
 
+    ngOnDestroy(): void {
+        this.world.destroy();
+    }
+
     draw(): void {
+        let component = this;
+
         let width = this.physicsElement.nativeElement.offsetWidth;
         let height = this.physicsElement.nativeElement.offsetHeight;
         let viewportBounds = Physics.aabb(0, 0, width, height);
@@ -38,15 +45,15 @@ export class BridgeComponent implements AfterViewInit {
             lineWidth: 3
         };
 
-        let world: any = Physics({ sleepDisabled: true });
+        component.world = Physics({ sleepDisabled: true });
 
         let renderer: any = Physics.renderer('canvas', {
             el: 'physics'
         });
-        world.add(renderer);
+        component.world.add(renderer);
 
-        world.on('step', function() {
-            world.render();
+        component.world.on('step', function() {
+            component.world.render();
         });
 
         // constrain objects to these bounds
@@ -114,7 +121,7 @@ export class BridgeComponent implements AfterViewInit {
             }
         }
 
-        world.on('render', function(data: any){
+        component.world.on('render', function(data: any){
             let renderer = data.renderer;
 
             let constraints = rigidConstraints.getConstraints().distanceConstraints;
@@ -143,26 +150,26 @@ export class BridgeComponent implements AfterViewInit {
             strength: 0.002
         });
 
-        world.on({
+        component.world.on({
             'interact:poke': function(pos: any){
-                world.wakeUpAll();
+                component.world.wakeUpAll();
                 attractor.position(pos);
-                world.add(attractor);
+                component.world.add(attractor);
             },
             'interact:move': function(pos: any){
                 attractor.position(pos);
             },
             'interact:release': function(){
-                world.wakeUpAll();
-                world.remove(attractor);
+                component.world.wakeUpAll();
+                component.world.remove(attractor);
             }
         });
 
         // add things to the world
-        world.add(bridgeLevelOne);
-        world.add(bridgeLevelTwo);
-        world.add(rigidConstraints);
-        world.add([
+        component.world.add(bridgeLevelOne);
+        component.world.add(bridgeLevelTwo);
+        component.world.add(rigidConstraints);
+        component.world.add([
             Physics.behavior('interactive', { el: renderer.el }),
             Physics.behavior('constant-acceleration'),
             Physics.behavior('body-impulse-response'),
@@ -173,7 +180,7 @@ export class BridgeComponent implements AfterViewInit {
 
         // subscribe to ticker to advance the simulation
         Physics.util.ticker.on(function(time: any) {
-            world.step( time );
+            component.world.step( time );
         });
     }
 }

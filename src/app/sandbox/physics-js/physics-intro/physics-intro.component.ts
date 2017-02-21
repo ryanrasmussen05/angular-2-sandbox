@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 
 declare let Physics: any;
 
@@ -8,35 +8,42 @@ declare let Physics: any;
     styleUrls: ['./physics-intro.component.scss']
 })
 
-export class PhysicsIntroComponent implements AfterViewInit {
+export class PhysicsIntroComponent implements AfterViewInit, OnDestroy {
     @ViewChild('physics') physicsElement: ElementRef;
+    world: any;
 
     infoBoxTitle: string = "Physics JS Intro";
     infoBoxBody: string = `Basic demo of the usage of Physics JS.  Clicking the mouse at any
                             point on the screen creates an "attractor" that acts like a center 
                             of gravity to pull particles in.`;
 
-    ngAfterViewInit() {
+    ngAfterViewInit(): void {
         this.draw();
     }
 
+    ngOnDestroy(): void {
+        this.world.destroy();
+    }
+
     draw(): void {
+        let component = this;
+
         let width = this.physicsElement.nativeElement.offsetWidth;
         let height = this.physicsElement.nativeElement.offsetHeight;
         let viewportBounds = Physics.aabb(0, 0, width, height);
 
-        let world: any = Physics({ sleepDisabled: true });
+        component.world = Physics({ sleepDisabled: true });
 
         let renderer: any = Physics.renderer('canvas', {
             el: 'physics'
         });
-        world.add(renderer);
+        component.world.add(renderer);
 
-        world.on('step', function() {
-            world.render();
+        component.world.on('step', function() {
+            component.world.render();
         });
 
-        world.add(Physics.behavior('interactive', { el: renderer.container }));
+        component.world.add(Physics.behavior('interactive', { el: renderer.container }));
 
         let edgeBounce = Physics.behavior('edge-collision-detection', {
             aabb: viewportBounds,
@@ -68,29 +75,29 @@ export class PhysicsIntroComponent implements AfterViewInit {
             );
         }
 
-        world.add(circles);
+        component.world.add(circles);
 
         let attractor = Physics.behavior('attractor', {
             order: 0,
             strength: 0.002
         });
 
-        world.on({
+        component.world.on({
             'interact:poke': function(pos: any){
-                world.wakeUpAll();
+                component.world.wakeUpAll();
                 attractor.position(pos);
-                world.add( attractor );
+                component.world.add( attractor );
             },
             'interact:move': function(pos: any){
                 attractor.position(pos);
             },
             'interact:release': function(){
-                world.wakeUpAll();
-                world.remove( attractor );
+                component.world.wakeUpAll();
+                component.world.remove( attractor );
             }
         });
 
-        world.add([
+        component.world.add([
             Physics.behavior('newtonian', { strength: 0.01 }),
             Physics.behavior('sweep-prune'),
             Physics.behavior('body-collision-detection', { checkAll: false }),
@@ -99,7 +106,7 @@ export class PhysicsIntroComponent implements AfterViewInit {
         ]);
 
         Physics.util.ticker.on(function(time: any) {
-            world.step( time );
+            component.world.step( time );
         });
 
         Physics.util.ticker.start();

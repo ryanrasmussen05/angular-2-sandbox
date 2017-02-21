@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 
 declare let Physics: any;
 
@@ -8,32 +8,39 @@ declare let Physics: any;
     styleUrls: ['./particles-two.component.scss']
 })
 
-export class ParticlesTwoComponent implements AfterViewInit {
+export class ParticlesTwoComponent implements AfterViewInit, OnDestroy {
     @ViewChild('physics') physicsElement: ElementRef;
+    world: any;
 
     infoBoxTitle: string = "Physics JS Particles";
     infoBoxBody: string = `A Physics JS implementation of the HTML Canvas Particles I created 
                             while learning about canvas.  There are no special interactions available
                             in this implementation.`;
 
-    ngAfterViewInit() {
+    ngAfterViewInit():void {
         this.draw();
     }
 
+    ngOnDestroy(): void {
+        this.world.destroy();
+    }
+
     draw(): void {
+        let component = this;
+
         let width = this.physicsElement.nativeElement.offsetWidth;
         let height = this.physicsElement.nativeElement.offsetHeight;
         let viewportBounds = Physics.aabb(0, 0, width, height);
 
-        let world: any = Physics({ sleepDisabled: true });
+        component.world = Physics({ sleepDisabled: true });
 
         let renderer: any = Physics.renderer('canvas', {
             el: 'physics'
         });
-        world.add(renderer);
+        component.world.add(renderer);
 
-        world.on('step', function() {
-            world.render();
+        component.world.on('step', function() {
+            component.world.render();
         });
 
         let edgeBounce = Physics.behavior('edge-collision-detection', {
@@ -67,9 +74,9 @@ export class ParticlesTwoComponent implements AfterViewInit {
             );
         }
 
-        world.add(circles);
+        component.world.add(circles);
 
-        world.add([
+        component.world.add([
             Physics.behavior('sweep-prune'),
             Physics.behavior('body-collision-detection'),
             Physics.behavior('body-impulse-response'),
@@ -77,7 +84,7 @@ export class ParticlesTwoComponent implements AfterViewInit {
         ]);
 
         Physics.util.ticker.on(function(time: any) {
-            world.step( time );
+            component.world.step( time );
         });
 
         Physics.util.ticker.start();

@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, AfterViewInit, NgZone } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit, NgZone, OnDestroy } from '@angular/core';
 
 declare let Physics: any;
 
@@ -8,9 +8,10 @@ declare let Physics: any;
     styleUrls: ['./solar-system.component.scss']
 })
 
-export class SolarSystemComponent implements AfterViewInit {
+export class SolarSystemComponent implements AfterViewInit, OnDestroy {
     @ViewChild('physics') physicsElement: ElementRef;
     bodies: number = 0;
+    world: any;
 
     infoBoxTitle: string = "Physics JS Solar System";
     infoBoxBody: string = `I created this to experiment with the "Newtonian" behavior of the 
@@ -20,26 +21,32 @@ export class SolarSystemComponent implements AfterViewInit {
 
     constructor(private zone: NgZone) {}
 
-    ngAfterViewInit() {
+    ngAfterViewInit():void {
         this.draw();
     }
 
+    ngOnDestroy(): void {
+        this.world.destroy();
+    }
+
     draw(): void {
+        let component = this;
+        
         let width = this.physicsElement.nativeElement.offsetWidth;
         let height = this.physicsElement.nativeElement.offsetHeight;
         let xMin = (width / 2) - (height / 2);
         let xMax = (width / 2) + (height / 2);
         let gravityStrength = 0.01;
 
-        let world:any = Physics({ sleepDisabled: true });
+        component.world = Physics({ sleepDisabled: true });
 
         let renderer: any = Physics.renderer('canvas', {
             el: 'physics'
         });
-        world.add(renderer);
+        component.world.add(renderer);
 
-        world.on('step', function() {
-            world.render();
+        component.world.on('step', function() {
+            component.world.render();
         });
 
         let sun = Physics.body('circle', {
@@ -53,7 +60,7 @@ export class SolarSystemComponent implements AfterViewInit {
                 fillStyle: '#0000FF'
             }
         });
-        world.add(sun);
+        component.world.add(sun);
 
         let circles = [];
 
@@ -89,15 +96,15 @@ export class SolarSystemComponent implements AfterViewInit {
             circles.push(circle);
         }
 
-        world.add(circles);
+        component.world.add(circles);
 
-        world.add([
+        component.world.add([
             Physics.behavior('newtonian', { strength: gravityStrength }),
             Physics.behavior('sweep-prune'),
             Physics.behavior('body-collision-detection', { checkAll: false })
         ]);
 
-        world.on('collisions:detected', function(data: any) {
+        component.world.on('collisions:detected', function(data: any) {
             let behavior = Physics.behavior('body-impulse-response');
 
             //apply default impulse first
@@ -109,9 +116,9 @@ export class SolarSystemComponent implements AfterViewInit {
                 let bodyB = data.collisions[i].bodyB;
 
                 if(bodyA.sun) {
-                    world.remove(bodyB);
+                    component.world.remove(bodyB);
                 } else if(bodyB.sun) {
-                    world.remove(bodyA);
+                    component.world.remove(bodyA);
                 } else {
                     let newBodyVolume = (4/3 * Math.PI * Math.pow(bodyA.radius, 3)) + (4/3 * Math.PI * Math.pow(bodyB.radius, 3));
                     let newBodyRadius = Math.pow(((3 / (4 * Math.PI)) * newBodyVolume), 1/3);
@@ -134,18 +141,16 @@ export class SolarSystemComponent implements AfterViewInit {
                         }
                     });
 
-                    world.add(newBody);
-                    world.remove(bodyA);
-                    world.remove(bodyB);
+                    component.world.add(newBody);
+                    component.world.remove(bodyA);
+                    component.world.remove(bodyB);
                 }
             }
         });
 
-        let that = this;
-
         Physics.util.ticker.on(function(time: any) {
-            world.step( time );
-            that.updateBodyCount(world.getBodies().length);
+            component.world.step( time );
+            component.updateBodyCount(component.world.getBodies().length);
         });
 
         Physics.util.ticker.start();

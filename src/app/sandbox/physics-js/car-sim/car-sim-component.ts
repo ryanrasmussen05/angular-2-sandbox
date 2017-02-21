@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 
 declare let Physics: any;
 
@@ -8,15 +8,16 @@ declare let Physics: any;
     styleUrls: ['./car-sim.component.scss']
 })
 
-export class CarSimComponent implements AfterViewInit {
+export class CarSimComponent implements AfterViewInit, OnDestroy {
     @ViewChild('physics') physicsElement: ElementRef;
+    world: any;
 
     infoBoxTitle: string = "Physics JS Car Sim";
     infoBoxBody: string = `Physics JS allows for the creation of custom behaviors.  I wanted to experiment
                             with creating a car simulation, so I created an "Angular Acceleration" (aka torque)
                             behavior to apply to wheels of a car.`;
 
-    ngAfterViewInit() {
+    ngAfterViewInit(): void {
         Physics.behavior('torque', function(parent: any) {
 
             let defaults = {
@@ -71,13 +72,19 @@ export class CarSimComponent implements AfterViewInit {
         this.draw();
     }
 
+    ngOnDestroy(): void {
+        this.world.destroy();
+    }
+
     draw(): void {
+        let component = this;
+
         let width = this.physicsElement.nativeElement.offsetWidth;
         let height = this.physicsElement.nativeElement.offsetHeight;
 
-        let world: any = Physics();
+        component.world = Physics();
 
-        world.add([
+        component.world.add([
             Physics.behavior('constant-acceleration'),
             Physics.behavior('sweep-prune'),
             Physics.behavior('body-collision-detection'),
@@ -90,14 +97,14 @@ export class CarSimComponent implements AfterViewInit {
         ]);
 
         let renderer = Physics.renderer('canvas', {el: 'physics'});
-        world.add(renderer);
+        component.world.add(renderer);
 
-        world.on('step', function() {
-            world.render();
+        component.world.on('step', function() {
+            component.world.render();
         });
 
         Physics.util.ticker.on(function(time: any) {
-            world.step(time);
+            component.world.step(time);
         });
 
         Physics.util.ticker.start();
@@ -125,7 +132,7 @@ export class CarSimComponent implements AfterViewInit {
             });
             roadSection.buildFromPoints(leftPoint, rightPoint);
 
-            world.add(roadSection);
+            component.world.add(roadSection);
         }
 
         //draw car
@@ -151,14 +158,14 @@ export class CarSimComponent implements AfterViewInit {
 
         rigidConstraints.distanceConstraint(wheels[0], wheels[1], 1);
 
-        world.on('render', function(){
+        component.world.on('render', function(){
             let constraint = rigidConstraints.getConstraints().distanceConstraints[0];
             renderer.drawLine(constraint.bodyA.state.pos, constraint.bodyB.state.pos, 'rgba(0, 0, 0, 1.0)');
         });
 
 
-        world.add(Physics.behavior('torque', {torque: 0.05}).applyTo(wheels));
-        world.add(wheels);
-        world.add(rigidConstraints);
+        component.world.add(Physics.behavior('torque', {torque: 0.05}).applyTo(wheels));
+        component.world.add(wheels);
+        component.world.add(rigidConstraints);
     }
 }
