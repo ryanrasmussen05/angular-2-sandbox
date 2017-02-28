@@ -1,0 +1,6 @@
+@import '../../../public/styles/mixins';
+
+:host {
+  @include flex-auto();
+  @include flex();
+}

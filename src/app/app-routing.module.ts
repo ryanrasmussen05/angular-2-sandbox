@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { BridgeComponent } from "./sandbox/physics-js/bridge/bridge.component";
 import { CarSimComponent } from "./sandbox/physics-js/car-sim/car-sim-component";
+import { CesiumComponent } from "./sandbox/cesium/cesium.component";
 import { FireworksComponent } from './sandbox/canvas/fireworks/fireworks.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { MontyHallComponent } from "./sandbox/monty-hall/monty-hall.component";
@@ -25,7 +26,8 @@ const routes: Routes = [
     { path: 'sandbox/solarSystem', component: SolarSystemComponent },
     { path: 'sandbox/bridge', component: BridgeComponent },
     { path: 'sandbox/carSim', component: CarSimComponent },
-    { path: 'sandbox/montyHall', component: MontyHallComponent }
+    { path: 'sandbox/montyHall', component: MontyHallComponent },
+    { path: 'sandbox/cesium', component: CesiumComponent }
 ];
 
 @NgModule({

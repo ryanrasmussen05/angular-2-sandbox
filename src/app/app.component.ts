@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 
 import '../public/images/favicon.ico';
 
+//cesium
+import 'cesium/Build/Cesium/Widgets/widgets.css';
 //semantic-ui
 import 'semantic-ui-css/semantic.min.css';
 //bass css

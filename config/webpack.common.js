@@ -1,6 +1,7 @@
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 var helpers = require('./helpers');
 
 module.exports = {
@@ -88,6 +89,14 @@ module.exports = {
             $: 'jquery',
             jquery: 'jquery',
             Physics: 'physicsjs'
-        })
+        }),
+
+        //copy all cesium build files to dist so Cesium can access them if needed
+        new CopyWebpackPlugin([
+            {
+                from: helpers.root('node_modules/cesium/Build/Cesium'),
+                to: './'
+            }
+        ])
     ]
 };

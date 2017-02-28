@@ -17,3 +17,6 @@ import 'semantic-ui-css/semantic.js';
 
 //physicsJS
 import 'physicsjs/dist/physicsjs.js';
+
+//cesium
+import 'cesium/Build/Cesium/Cesium.js';

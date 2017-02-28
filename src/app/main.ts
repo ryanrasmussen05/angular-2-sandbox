@@ -8,3 +8,6 @@ if (process.env.ENV === 'production') {
 }
 
 platformBrowserDynamic().bootstrapModule(AppModule);
+
+//set cesium base URL
+window['CESIUM_BASE_URL'] = '/';
