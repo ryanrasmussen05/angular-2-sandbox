@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
+import { CovalentLayoutModule } from '@covalent/core';
+
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent }  from './app.component';
@@ -24,10 +26,11 @@ import { StaticContentService } from './static-content/static-content.service';
 
 @NgModule({
     imports: [
+        AppRoutingModule,
         BrowserModule,
+        CovalentLayoutModule,
         FormsModule,
         HttpModule,
-        AppRoutingModule
     ],
     declarations: [
         AppComponent,

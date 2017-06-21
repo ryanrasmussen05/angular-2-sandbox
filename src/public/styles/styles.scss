@@ -1,15 +1,9 @@
+@import './covalent';
+
 body {
   background-image:url('../images/background.jpg');
 }
 
 canvas {
   display: block;
-}
-
-.full-width {
-  width: 100%;
-}
-
-.full-height {
-  height: 100%;
 }

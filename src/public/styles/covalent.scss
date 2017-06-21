@@ -1,0 +1,10 @@
+@import '~@angular/material/theming';
+@import '~@covalent/core/theming/all-theme';
+@import '~@covalent/core/common/platform';
+
+@include mat-core();
+
+$theme: mat-light-theme(mat-palette($mat-blue), mat-palette($mat-orange));
+
+@include angular-material-theme($theme);
+@include covalent-theme($theme);
