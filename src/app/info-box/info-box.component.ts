@@ -14,6 +14,6 @@ export class InfoBoxComponent {
 
     @HostListener('click', ['$event']) onClick(event: MouseEvent) {
         event.preventDefault();
-        $(this.modalElement.nativeElement).modal('show');
+        //$(this.modalElement.nativeElement).modal('show');
     }
 }

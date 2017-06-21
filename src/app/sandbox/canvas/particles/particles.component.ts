@@ -37,7 +37,7 @@ export class ParticlesComponent implements AfterViewInit, OnDestroy {
                             a small amount of kinetic energy is lost after a collision to create a more realistic effect.`;
 
     ngAfterViewInit(): void {
-        $('.ui.dropdown').dropdown();
+        //$('.ui.dropdown').dropdown();
 
         this.canvas = this.canvasElement.nativeElement;
         this.ctx = this.canvas.getContext('2d');

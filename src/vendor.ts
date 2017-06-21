@@ -9,11 +9,5 @@ import '@angular/router';
 // RxJS
 import 'rxjs';
 
-//jquery
-import 'jquery';
-
-//semantic
-import 'semantic-ui-css/semantic.js';
-
 //physicsJS
 import 'physicsjs/dist/physicsjs.js';
