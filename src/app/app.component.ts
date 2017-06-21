@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
 
-import '../public/images/favicon.ico';
-
 //custom app-wide styles
 import '../public/styles/styles.scss';
 
 @Component({
-    selector: 'rr-my-app',
+    selector: 'rr-app',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss']
 })

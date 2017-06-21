@@ -10,26 +10,7 @@ let helpers = require('./config/helpers');
 
 let {getIfUtils, removeEmpty} = require('webpack-config-utils');
 
-let port = 8100;
-const stats = {
-    assets: false,
-    cached: false,
-    children: false,
-    chunks: false,
-    chunkModules: false,
-    chunkOrigins: false,
-    colors: true,
-    errors: true,
-    errorDetails: true,
-    hash: false,
-    modules: false,
-    publicPath: false,
-    reasons: false,
-    source: false,
-    timings: true,
-    version: false,
-    warnings: true,
-};
+let port = 8700;
 
 let config = function(env = {dev: true}) {
 
@@ -126,10 +107,8 @@ let config = function(env = {dev: true}) {
         devServer: {
             historyApiFallback: true,
             inline: true,
-            port: port,
-            stats: stats
+            port: port
         },
-        stats: stats,
         devtool: ifProd('source-map', 'cheap-module-inline-source-map')
     };
 };
