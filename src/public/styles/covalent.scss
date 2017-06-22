@@ -4,7 +4,7 @@
 
 @include mat-core();
 
-$theme: mat-light-theme(mat-palette($mat-blue), mat-palette($mat-orange));
+$theme: mat-light-theme(mat-palette($mat-blue, 900), mat-palette($mat-orange));
 
 @include angular-material-theme($theme);
 @include covalent-theme($theme);

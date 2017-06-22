@@ -1,9 +1,11 @@
 import { NgModule }      from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { CovalentLayoutModule } from '@covalent/core';
+import { MdButtonModule, MdIconModule, MdToolbarModule } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -27,10 +29,14 @@ import { StaticContentService } from './static-content/static-content.service';
 @NgModule({
     imports: [
         AppRoutingModule,
+        BrowserAnimationsModule,
         BrowserModule,
         CovalentLayoutModule,
         FormsModule,
         HttpModule,
+        MdButtonModule,
+        MdIconModule,
+        MdToolbarModule
     ],
     declarations: [
         AppComponent,

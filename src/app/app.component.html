@@ -1,8 +1,15 @@
-<div flex>
-    <div>
-        <rr-navigation-menu></rr-navigation-menu>
-    </div>
-    <div>
+<div layout="column" class="fullscreen">
+    <md-toolbar color="primary">
+        <div flex layout layout-align="space-between center">
+            <h1>Ryan Rasmussen</h1>
+            <div>
+                <button md-button>Home</button>
+                <button md-button>Resume</button>
+                <button md-button>Sandbox</button>
+            </div>
+        </div>
+    </md-toolbar>
+    <div flex class="scroll">
         <router-outlet></router-outlet>
     </div>
 </div>
