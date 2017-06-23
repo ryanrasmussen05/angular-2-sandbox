@@ -19,3 +19,8 @@ canvas {
 .scroll {
   overflow: auto;
 }
+
+[md-button].active-link {
+  color: $accentColor;
+  border-bottom: 1px solid $accentColor;
+}

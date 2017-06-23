@@ -4,7 +4,13 @@
 
 @include mat-core();
 
-$theme: mat-light-theme(mat-palette($mat-blue, 900), mat-palette($mat-orange));
+$primaryMaterialMap: mat-palette($mat-blue, 900);
+$accentMaterialMap: mat-palette($mat-orange, 500);
+
+$primaryColor: map_get($primaryMaterialMap, default);
+$accentColor: map_get($accentMaterialMap, default);
+
+$theme: mat-light-theme($primaryMaterialMap, $accentMaterialMap);
 
 @include angular-material-theme($theme);
 @include covalent-theme($theme);
