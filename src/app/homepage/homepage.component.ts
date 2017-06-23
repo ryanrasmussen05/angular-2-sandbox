@@ -5,8 +5,7 @@ import { StaticContentService } from '../static-content/static-content.service';
 
 @Component({
     selector: 'rr-homepage',
-    templateUrl: './homepage.component.html',
-    styleUrls: ['./homepage.component.scss']
+    templateUrl: './homepage.component.html'
 })
 
 export class HomepageComponent implements OnInit {

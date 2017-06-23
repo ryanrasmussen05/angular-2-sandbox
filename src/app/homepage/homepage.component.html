@@ -1,7 +1,7 @@
 <div class="text-center bgc-dark-grey-B15 tc-grey-50 pad-xl">
     <h1 class="md-display-2 push-top-none">Ryan Rasmussen</h1>
-    <h3 class="md-headline push-none">Software Engineer</h3>
-    <h5 class="md-subhead push-none">Papillion, Nebraska</h5>
+    <h1 class="md-headline push-none">Software Engineer</h1>
+    <h1 class="md-subhead push-none">Papillion, Nebraska</h1>
     <div class="pad">
         <a md-raised-button class="bgc-blue-400 push-right-sm" href="http://www.linkedin.com/in/ryanrasmussen05" target="_blank">
             LinkedIn
@@ -12,53 +12,49 @@
     </div>
 </div>
 
-
-
-<div class="ui text container mt3">
-    <h2 class="ui header">About</h2>
-    <div class="mb2">
+<div class="text-container push-top-lg">
+    <h2>About</h2>
+    <div class="push-bottom-sm">
         I am a full-stack web developer and an Android developer in my spare time.  I built this site using
-        <span class="bold">Angular 2 with TypeScript</span>, <span class="bold">Semantic UI</span>, <span class="bold">Basscss</span>, and <span class="bold">Webpack</span>
+        <b>Angular 2 with TypeScript</b>, <b>Covalent UI</b>, and <b>Webpack</b>
          as a way to stay up-to-date on the latest browser technologies, and as a sandbox for learning to use various libraries.
     </div>
-    <a class="ui button" routerLink="/resume">Resume</a>
+    <a md-raised-button color="accent" routerLink="/resume">Resume</a>
 </div>
 
-<div class="ui container divider my3"></div>
+<div class="divider push-top-xl push-bottom-xl"></div>
 
-<img class="ui centered medium image" src="../../public/images/rhino_logo-teal.png">
+<img class="image medium centered" src="../../public/images/rhino_logo-teal.png">
 
-<div class="ui text container mt3">
-    <h2 class="ui header">Android Development</h2>
-    <div class="mb2">
-        I publish apps to Google Play under the developer name <span class="bold">Rhino Development</span>.
-        I currently have two apps in the store, and a custom Asteroids game that I hope to publish soon.
+<div class="text-container">
+    <h2>Android Development</h2>
+    <div>
+        I publish apps to Google Play under the developer name <b>Rhino Development</b>.
+        I currently have two apps in the store, and a couple more in progress.
     </div>
-    <div class="ui items mt4">
-        <div class="item mt3 mb0" *ngFor="let androidApp of androidApps">
-            <a class="ui image small" href="{{androidApp.url}}" target="_blank">
-                <img [src]="getImage(androidApp.image)">
-            </a>
-            <div class="content">
-                <a class="header" href="{{androidApp.url}}" target="_blank">{{androidApp.title}}</a>
-                <div class="description">
-                    <p>{{androidApp.description}}</p>
-                </div>
+    <div layout class="push-top-lg" *ngFor="let androidApp of androidApps">
+        <a href="{{androidApp.url}}" target="_blank">
+            <img class="image small" [src]="getImage(androidApp.image)">
+        </a>
+        <div flex class="pad-left-lg pad-right-lg">
+            <a class="md-title standard-link" href="{{androidApp.url}}" target="_blank">{{androidApp.title}}</a>
+            <div class="description">
+                <p>{{androidApp.description}}</p>
             </div>
         </div>
     </div>
 </div>
 
-<div class="ui container divider my3"></div>
+<div class="divider push-top-xl push-bottom-xl"></div>
 
-<div class="ui text container mt3">
-    <h2 class="ui header">Sandbox</h2>
-    <div class="mb2">
+<div class="text-container">
+    <h2>Sandbox</h2>
+    <div class="push-bottom-sm">
         This is the area I use to store various components I create while learning new/interesting libraries.
     </div>
-    <a class="ui button" routerLink="/sandbox">Sandbox</a>
+    <a md-raised-button color="accent" routerLink="/sandbox">Sandbox</a>
 </div>
 
-<div class="ui container divider my3 pb4"></div>
-
-<rr-footer></rr-footer>
+<div class="push-top-xxl">
+    <rr-footer></rr-footer>
+</div>
