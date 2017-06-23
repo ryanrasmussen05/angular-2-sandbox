@@ -5,7 +5,7 @@
 @include mat-core();
 
 $primaryMaterialMap: mat-palette($mat-grey, 800);
-$accentMaterialMap: mat-palette($mat-orange, 500);
+$accentMaterialMap: mat-palette($mat-light-blue, 600);
 
 $primaryColor: map_get($primaryMaterialMap, default);
 $accentColor: map_get($accentMaterialMap, default);
