@@ -1,54 +1,61 @@
-<div class="ui container mb4 pb4">
-    <h1 class="ui center aligned block header mt3 mb4">
-        <i class="suitcase icon"></i>
-        Employment
-    </h1>
-    <div class="ui divided items pb4">
-        <div class="item py3" *ngFor="let resumeItem of resumeItems">
-            <div class="ui small image self-center">
-                <img [src]="getImage(resumeItem.image)">
+<div class="text-center">
+    <h1 class="push-bottom-xl">Employment</h1>
+</div>
+
+<div class="text-container pad-bottom-xl">
+    <div *ngFor="let resumeItem of resumeItems; let last = last">
+        <div layout>
+            <div class="small image">
+                <img class="full-width" [src]="getImage(resumeItem.image)">
             </div>
-            <div class="content">
-                <div class="header">{{resumeItem.jobTitle}}</div>
-                <div>
-                    <span class="bold mr1">{{resumeItem.company}}</span>
+            <div flex class="push-left-md">
+                <div class="md-title">{{resumeItem.jobTitle}}</div>
+                <div class="md-subhead">
+                    <span class="push-right-xs"><b>{{resumeItem.company}}</b></span>
                     <span>{{resumeItem.location}}</span>
                 </div>
-                <div class="meta">
+                <div class="md-caption">
                     {{resumeItem.startDate + " - " + resumeItem.endDate}}
                 </div>
-                <div class="description ui bulleted list">
-                    <div class="item" *ngFor="let bullet of resumeItem.bullets">
+                <ul class="md-body-1 push-top-sm pad-left-md">
+                    <li *ngFor="let bullet of resumeItem.bullets">
                         {{bullet}}
-                    </div>
-                </div>
+                    </li>
+                </ul>
             </div>
         </div>
-    </div>
-    <h1 class="ui center aligned block header my4">
-        <i class="student icon"></i>
-        Education
-    </h1>
-    <div class="ui divided items">
-        <div class="item py3" *ngFor="let educationItem of educationItems">
-            <div class="ui small image self-center">
-                <img [src]="getImage(educationItem.image)">
-            </div>
-            <div class="content">
-                <div class="header">{{educationItem.degree + ", " + educationItem.minor}}</div>
-                <div>
-                    <span class="bold mr1">{{educationItem.school}}</span>
-                </div>
-                <div>
-                    {{educationItem.location}}
-                </div>
-                <div class="description ui bulleted list">
-                    <div class="item">{{"Graduated " + educationItem.graduationDate}}</div>
-                    <div class="item">{{"GPA: " + educationItem.gpa}}</div>
-                </div>
-            </div>
-        </div>
+        <div *ngIf="!last" class="divider push-top-lg push-bottom-lg"></div>
     </div>
 </div>
 
-<rr-footer></rr-footer>
+<div class="text-center">
+    <h1 class="push-bottom-xl push-top-xxl">Education</h1>
+</div>
+
+<div class="text-container">
+    <div *ngFor="let educationItem of educationItems; let last = last">
+        <div layout>
+            <div class="small image">
+                <img class="full-width" [src]="getImage(educationItem.image)">
+            </div>
+            <div flex class="push-left-md">
+                <div class="md-title">{{educationItem.degree + ", " + educationItem.minor}}</div>
+                <div class="md-subhead">
+                    <span class="push-right-xs"><b>{{educationItem.school}}</b></span>
+                </div>
+                <div class="md-caption">
+                    {{educationItem.location}}
+                </div>
+                <ul class="md-body-1 push-top-sm pad-left-md">
+                    <li class="item">{{"Graduated " + educationItem.graduationDate}}</li>
+                    <li class="item">{{"GPA: " + educationItem.gpa}}</li>
+                </ul>
+            </div>
+        </div>
+        <div *ngIf="!last" class="divider push-top-lg push-bottom-lg"></div>
+    </div>
+</div>
+
+<div class="push-top-xxl">
+    <rr-footer></rr-footer>
+</div>
