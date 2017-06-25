@@ -1,15 +1,15 @@
-import { Component, OnDestroy, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnDestroy, ElementRef, ViewChild, AfterViewInit, HostBinding } from '@angular/core';
 
 import { Firework } from "./firework";
 import { Particle } from "./particle";
 
 @Component({
     selector: 'rr-fireworks',
-    templateUrl: './fireworks.component.html',
-    styleUrls: ['./fireworks.component.scss']
+    templateUrl: './fireworks.component.html'
 })
 
 export class FireworksComponent implements AfterViewInit, OnDestroy {
+    @HostBinding('class') hostClass = 'fullscreen-graphics';
     @ViewChild('canvas') canvasElement: ElementRef;
 
     canvas: HTMLCanvasElement;
@@ -32,11 +32,6 @@ export class FireworksComponent implements AfterViewInit, OnDestroy {
     limiterTotal: number;
 
     intervalId: number;
-
-    infoBoxTitle: string = "HTML Canvas Fireworks";
-    infoBoxBody: string = `This is a fireworks animation created with a standard HTML Canvas.  Fireworks
-                            launch in random direction at a set interval, or you can click anywhere on the 
-                            screen to launch new fireworks more rapidly`;
 
     constructor(public el: ElementRef){}
 

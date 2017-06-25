@@ -1,29 +1,14 @@
-<div class="flex-auto flex flex-column">
-    <div class="button-bar flex-none flex items-center">
-        <div class="flex-auto">
-            <div class="ui button" [class.blue]="gravity" [class.red]="!gravity" (click)="toggleGravity()">
-                Turn Gravity {{gravity ? 'Off' : 'On'}}
-            </div>
-            <div class="ui button" [class.blue]="collisions" [class.red]="!collisions" (click)="toggleCollisions()">
-                Turn Collisions {{collisions ? 'Off' : 'On'}}
-            </div>
-            <div class="ui selection dropdown">
-                {{orbs + " Orbs"}}
-                <i class="dropdown icon"></i>
-                <div class="menu">
-                    <div class="item" (click)="setOrbs(10)">10 Orbs</div>
-                    <div class="item" (click)="setOrbs(20)">20 Orbs</div>
-                    <div class="item" (click)="setOrbs(30)">30 Orbs</div>
-                    <div class="item" (click)="setOrbs(40)">40 Orbs</div>
-                    <div class="item" (click)="setOrbs(50)">50 Orbs</div>
-                </div>
-            </div>
-        </div>
-        <div class="flex-none">
-            <rr-info-box [title]="infoBoxTitle" [body]="infoBoxBody"></rr-info-box>
-        </div>
-    </div>
-    <div #canvasWrapper class="flex-auto">
-        <canvas #canvas></canvas>
-    </div>
+<div layout layout-align="start center" class="pad bgc-dark-grey-B15 tc-grey-50">
+    <md-checkbox [(ngModel)]="gravity" class="push-right-lg">Gravity</md-checkbox>
+    <md-checkbox [(ngModel)]="collisions" class="push-right-lg">Collisions</md-checkbox>
+    <md-select [(ngModel)]="orbs">
+        <md-option value="10" (click)="setOrbs('10')">10 Orbs</md-option>
+        <md-option value="20" (click)="setOrbs('20')">20 Orbs</md-option>
+        <md-option value="30" (click)="setOrbs('30')">30 Orbs</md-option>
+        <md-option value="40" (click)="setOrbs('40')">40 Orbs</md-option>
+        <md-option value="50" (click)="setOrbs('50')">50 Orbs</md-option>
+    </md-select>
+</div>
+<div #canvasWrapper flex>
+    <canvas #canvas></canvas>
 </div>

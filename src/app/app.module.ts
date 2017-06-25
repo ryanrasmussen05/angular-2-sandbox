@@ -5,7 +5,10 @@ import { FormsModule }   from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { CovalentLayoutModule } from '@covalent/core';
-import { MdButtonModule, MdCardModule, MdIconModule, MdToolbarModule } from '@angular/material';
+import {
+    MdButtonModule, MdCardModule, MdCheckboxModule, MdIconModule, MdSelectModule,
+    MdToolbarModule
+} from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -36,7 +39,9 @@ import { StaticContentService } from './static-content/static-content.service';
         HttpModule,
         MdButtonModule,
         MdCardModule,
+        MdCheckboxModule,
         MdIconModule,
+        MdSelectModule,
         MdToolbarModule
     ],
     declarations: [

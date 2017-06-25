@@ -1,4 +1,4 @@
-import { Component, OnDestroy, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnDestroy, ElementRef, ViewChild, AfterViewInit, HostBinding } from '@angular/core';
 
 import { Particle } from "./particle";
 
@@ -14,6 +14,7 @@ interface PhysicsNormal {
 })
 
 export class ParticlesComponent implements AfterViewInit, OnDestroy {
+    @HostBinding('class') hostClass = 'fullscreen-graphics layout-column';
     @ViewChild('canvas') canvasElement: ElementRef;
     @ViewChild('canvasWrapper') canvasWrapperElement: ElementRef;
 
@@ -23,22 +24,15 @@ export class ParticlesComponent implements AfterViewInit, OnDestroy {
     screenWidth: number;
     screenHeight: number;
 
-    gravity: boolean;
-    collisions: boolean;
-    orbs: number;
+    gravity: boolean = false;
+    collisions: boolean = false;
+    orbs: string = "30";
 
     particles: Particle[];
 
     intervalId: number;
 
-    infoBoxTitle: string = "HTML Canvas Particles";
-    infoBoxBody: string = `Free floating particles created with a standard HTML Canvas.  Collision reactions are calculated
-                            using a collision normal vector and mass based on two dimensional area.  When gravity is enabled, 
-                            a small amount of kinetic energy is lost after a collision to create a more realistic effect.`;
-
     ngAfterViewInit(): void {
-        //$('.ui.dropdown').dropdown();
-
         this.canvas = this.canvasElement.nativeElement;
         this.ctx = this.canvas.getContext('2d');
 
@@ -46,10 +40,6 @@ export class ParticlesComponent implements AfterViewInit, OnDestroy {
         this.screenHeight = this.canvasWrapperElement.nativeElement.offsetHeight;
         this.canvas.width = this.screenWidth;
         this.canvas.height = this.screenHeight;
-
-        this.gravity = false;
-        this.collisions = false;
-        this.orbs = 30;
 
         this.particles = [];
 
@@ -61,7 +51,7 @@ export class ParticlesComponent implements AfterViewInit, OnDestroy {
     }
 
     initCanvas(): void {
-        for(let i = 0; i < this.orbs; i++) {
+        for(let i = 0; i < +this.orbs; i++) {
             this.particles.push(new Particle(this.screenWidth, this.screenHeight));
         }
 
@@ -145,7 +135,7 @@ export class ParticlesComponent implements AfterViewInit, OnDestroy {
         this.collisions = !this.collisions;
     }
 
-    setOrbs(orbs: number): void {
+    setOrbs(orbs: string): void {
         clearInterval(this.intervalId);
         this.orbs = orbs;
         this.particles = [];
