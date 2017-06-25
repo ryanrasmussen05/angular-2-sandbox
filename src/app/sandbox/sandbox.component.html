@@ -1,51 +1,72 @@
-<div class="ui container mt3">
-    <h1 class="ui center aligned header">
-        <i class="lab icon"></i>
-        Sandbox
-    </h1>
+<div class="text-center">
+    <h1 class="push-bottom-xl">Sandbox</h1>
 </div>
 
-<div class="ui text container mt3 mb4 pb4">
-    <div class="ui divided items">
-        <div class="item py3">
-            <a class="ui small image self-center" href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API" target="_blank">
-                <img src="../../public/images/html5.png">
-            </a>
-            <div class="content ml2">
-                <a class="header" href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API" target="_blank">HTML Canvas</a>
-                <div class="ui large bulleted list">
-                    <a class="item" routerLink="/sandbox/fireworks">Fireworks</a>
-                    <a class="item" routerLink="/sandbox/particles">Particles</a>
+<div class="text-container push-bottom-lg">
+    <md-card>
+        <md-card-content>
+            <div layout>
+                <a class="small image" href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API" target="_blank">
+                    <img class="full-width" src="../../public/images/html5.png">
+                </a>
+                <div flex class="push-left-md">
+                    <div class="md-title">HTML Canvas</div>
+                    <div>
+                        <ul>
+                            <li><a class="md-subhead standard-link" routerLink="/sandbox/fireworks">Fireworks</a></li>
+                            <li><a class="md-subhead standard-link" routerLink="/sandbox/particles">Particles</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="item py3">
-            <a class="ui small image self-center" href="http://wellcaffeinated.net/PhysicsJS/" target="_blank">
-                <img src="../../public/images/physicsjs.png">
-            </a>
-            <div class="content ml2">
-                <a class="header" href="http://wellcaffeinated.net/PhysicsJS/" target="_blank">Physics JS</a>
-                <div class="ui large bulleted list">
-                    <a class="item" routerLink="/sandbox/physicsIntro">PhysicsJS Intro</a>
-                    <a class="item" routerLink="/sandbox/particlesTwo">Particles Two</a>
-                    <a class="item" routerLink="/sandbox/solarSystem">Solar System</a>
-                    <a class="item" routerLink="/sandbox/bridge">Bridge</a>
-                    <a class="item" routerLink="/sandbox/carSim">Angular Acceleration</a>
-                </div>
-            </div>
-        </div>
-        <div class="item py3">
-            <div class="ui small image self-center">
-                <img src="../../public/images/other-development.png">
-            </div>
-            <div class="content ml2">
-                <div class="header">Other Development</div>
-                <div class="ui large bulleted list">
-                    <a class="item" routerLink="/sandbox/montyHall">Monty Hall Paradox</a>
-                </div>
-            </div>
-        </div>
-    </div>
+        </md-card-content>
+    </md-card>
 </div>
 
-<rr-footer></rr-footer>
+<div class="text-container push-bottom-lg">
+    <md-card>
+        <md-card-content>
+            <div layout>
+                <a class="small image" href="http://wellcaffeinated.net/PhysicsJS/" target="_blank">
+                    <img class="full-width" src="../../public/images/physicsjs.png">
+                </a>
+                <div flex class="push-left-md">
+                    <div class="md-title">Physics JS</div>
+                    <div>
+                        <ul>
+                            <li><a class="md-subhead standard-link" routerLink="/sandbox/physicsIntro">PhysicsJS Intro</a></li>
+                            <li><a class="md-subhead standard-link" routerLink="/sandbox/particlesTwo">Particles Two</a></li>
+                            <li><a class="md-subhead standard-link" routerLink="/sandbox/solarSystem">Solar System</a></li>
+                            <li><a class="md-subhead standard-link" routerLink="/sandbox/bridge">Bridge</a></li>
+                            <li><a class="md-subhead standard-link" routerLink="/sandbox/carSim">Angular Acceleration</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </md-card-content>
+    </md-card>
+</div>
+
+<div class="text-container push-bottom-lg">
+    <md-card>
+        <md-card-content>
+            <div layout>
+                <a class="small image">
+                    <img class="full-width" src="../../public/images/other-development.png">
+                </a>
+                <div flex class="push-left-md">
+                    <div class="md-title">Other Development</div>
+                    <div>
+                        <ul>
+                            <li><a class="md-subhead standard-link" routerLink="/sandbox/montyHall">Monty Hall Paradox</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </md-card-content>
+    </md-card>
+</div>
+
+<div class="push-top-xxl">
+    <rr-footer></rr-footer>
+</div>
