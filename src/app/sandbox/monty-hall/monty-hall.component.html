@@ -1,77 +1,56 @@
-<div class="relative">
-    <div class="absolute top-0 right-0 p1">
-        <rr-info-box [title]="infoBoxTitle" [body]="infoBoxBody"></rr-info-box>
-    </div>
+<div layout layout-align="start center" class="pad bgc-dark-grey-B15 tc-grey-50">
+    <button md-raised-button color="accent" (click)="initializeTests(false)" class="push-right">Run 'Stick' Test</button>
+    <button md-raised-button color="accent" (click)="initializeTests(true)">Run 'Switch' Test</button>
+    <div flex></div>
+    <button md-raised-button color="warn" (click)="initializeGame()">Reset</button>
 </div>
 
-<div class="ui segment container mt2 clearfix">
-    <div class="ui blue button" (click)="initializeTests(false)">Run 'Stick' Test</div>
-    <div class="ui blue button" (click)="initializeTests(true)">Run 'Switch' Test</div>
-    <div class="ui red button right" (click)="initializeGame()">Reset</div>
+<div class="text-center">
+    <h1 class="push-bottom-xl">Monty Hall Paradox</h1>
 </div>
 
-<div class="ui center aligned large header">
-    Monty Hall Paradox
-</div>
-
-<div class="ui three column grid container pt2">
-    <div class="column center aligned">
-        <div class="door inline-block relative" [class.open]="isDoorOpen(1)" [class.selected]="selectedDoor === 1" (click)="doorClick(1)">
-            <img class="ui small image" [src]="getImage(1)">
-            <div class="cover absolute top-0 right-0 bottom-0 left-0 flex items-center justify-center">
-                1
-            </div>
+<div layout layout-align="space-between center" class="text-container">
+    <div class="door relative" [class.open]="isDoorOpen(1)" [class.selected]="selectedDoor === 1" (click)="doorClick(1)">
+        <img class="ui small image" [src]="getImage(1)">
+        <div layout layout-align="center center" class="cover">
+            1
         </div>
     </div>
-    <div class="column center aligned">
-        <div class="door inline-block relative" [class.open]="isDoorOpen(2)" [class.selected]="selectedDoor === 2" (click)="doorClick(2)">
-            <img class="ui small image" [src]="getImage(2)">
-            <div class="cover absolute top-0 right-0 bottom-0 left-0 flex items-center justify-center">
-                2
-            </div>
+    <div class="door relative" [class.open]="isDoorOpen(2)" [class.selected]="selectedDoor === 2" (click)="doorClick(2)">
+        <img class="ui small image" [src]="getImage(2)">
+        <div layout layout-align="center center" class="cover">
+            2
         </div>
     </div>
-    <div class="column center aligned">
-        <div class="door inline-block relative" [class.open]="isDoorOpen(3)" [class.selected]="selectedDoor === 3" (click)="doorClick(3)">
-            <img class="ui small image" [src]="getImage(3)">
-            <div class="cover absolute top-0 right-0 bottom-0 left-0 flex items-center justify-center">
-                3
-            </div>
+    <div class="door relative" [class.open]="isDoorOpen(3)" [class.selected]="selectedDoor === 3" (click)="doorClick(3)">
+        <img class="ui small image" [src]="getImage(3)">
+        <div layout layout-align="center center" class="cover">
+            3
         </div>
     </div>
 </div>
 
-<div class="ui center aligned container mt3" *ngIf="!runningTest">
-    <span class="ui header" *ngIf="gameState === 'initial'">
-        Choose a door
-    </span>
-    <div class="ui button blue" (click)="openRandomLoser()" *ngIf="gameState === 'openLoser'">
+<div class="text-center push-top-lg" *ngIf="!runningTest">
+    <h1 class="md-display-1" *ngIf="gameState === 'initial'">Choose a door</h1>
+    <button md-raised-button color="accent" (click)="openRandomLoser()" *ngIf="gameState === 'openLoser'">
         Open A Losing Door
-    </div>
+    </button>
     <div *ngIf="gameState === 'stickOrSwitch'">
-        <div class="ui button blue" (click)="switchDoor(false)">
-            {{ 'Stick With Door ' + selectedDoor }}
-        </div>
-        <div class="ui button blue" (click)="switchDoor(true)">
-            {{ 'Switch To Door ' + getOtherAvailableDoor() }}
-        </div>
+        <button md-raised-button color="accent" class="push-right" (click)="switchDoor(false)">{{ 'Stick With Door ' + selectedDoor }}</button>
+        <button md-raised-button color="accent" (click)="switchDoor(true)">{{ 'Switch To Door ' + getOtherAvailableDoor() }}</button>
     </div>
-    <div class="ui button blue" (click)="finishGame()" *ngIf="gameState === 'reveal'">
-        Reveal
-    </div>
-    <span class="ui header" *ngIf="gameState === 'gameOver'">
-        {{ finishText }}
-    </span>
+    <button md-raised-button color="accent" (click)="finishGame()" *ngIf="gameState === 'reveal'">Reveal</button>
+    <h1 class="md-display-1" *ngIf="gameState === 'gameOver'">{{ finishText }}</h1>
     <div *ngIf="gameState === 'testCompleted'">
-        <span class="ui header mr3">
+        <span class="md-display-1">
             {{ 'Won: ' + winners }}
         </span>
-            <span class="ui header">
+        <span class="md-display-1">
             {{ 'Lost: ' + losers }}
         </span>
     </div>
 </div>
 
-<div class="ui container mt3">
-    <span class="test-output inline-block mr2 mb2 {{result}}" *ngFor="let result of testOutputs">{{result | uppercase}}</span>
+<div class="wide-container push-top-md">
+    <span class="test-output inline-block push-right-sm {{result}}" *ngFor="let result of testOutputs">{{result | uppercase}}</span>
 </div>
