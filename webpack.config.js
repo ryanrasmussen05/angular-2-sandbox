@@ -65,7 +65,7 @@ let config = function(env = {dev: true}) {
             ]
         },
         output: {
-            path: path.resolve('./build'),
+            path: path.resolve('./dist'),
             filename: '[name].js',
             sourceMapFilename: '[file].map'
         },

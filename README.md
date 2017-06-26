@@ -3,14 +3,14 @@
 ##Install Instructions:
 * npm install
 
-##Run Linter:
-* npm run lint
-
 ##Run Development Server:
-* npm run dev
+* npm start
 
-##Build for Deployment *(/dist folder)*:
-* npm run build
+##Development Build
+* npm run build:dev
+
+##Production Build *(/dist folder)*:
+* npm run build:prod
 
 
 ##Deploy to Firebase
