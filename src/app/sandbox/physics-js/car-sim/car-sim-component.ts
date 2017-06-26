@@ -1,21 +1,16 @@
-import { Component, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit, OnDestroy, HostBinding } from '@angular/core';
 
 declare let Physics: any;
 
 @Component({
     selector: 'rr-car-sim',
-    templateUrl: './car-sim.component.html',
-    styleUrls: ['./car-sim.component.scss']
+    templateUrl: './car-sim.component.html'
 })
 
 export class CarSimComponent implements AfterViewInit, OnDestroy {
+    @HostBinding('class') hostClass = 'fullscreen-graphics layout-column';
     @ViewChild('physics') physicsElement: ElementRef;
     world: any;
-
-    infoBoxTitle: string = "Physics JS Car Sim";
-    infoBoxBody: string = `Physics JS allows for the creation of custom behaviors.  I wanted to experiment
-                            with creating a car simulation, so I created an "Angular Acceleration" (aka torque)
-                            behavior to apply to wheels of a car.`;
 
     ngAfterViewInit(): void {
         Physics.behavior('torque', function(parent: any) {

@@ -76,6 +76,9 @@ let config = function(env = {dev: true}) {
                 favicon: 'src/public/images/favicon.ico',
                 chunksSortMode: orderByList(['polyfills', 'app'])
             }),
+            new webpack.ProvidePlugin({
+                Physics: 'physicsjs'
+            }),
             new ExtractTextPlugin('[name].css'),
             new webpack.ContextReplacementPlugin(
                 /angular(\\|\/)core(\\|\/)@angular/, path.resolve('./src'), {}

@@ -1,22 +1,16 @@
-import { Component, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit, OnDestroy, HostBinding } from '@angular/core';
 
 declare let Physics: any;
 
 @Component({
     selector: 'rr-bridge',
-    templateUrl: './bridge.component.html',
-    styleUrls: ['./bridge.component.scss']
+    templateUrl: './bridge.component.html'
 })
 
 export class BridgeComponent implements AfterViewInit, OnDestroy {
+    @HostBinding('class') hostClass = 'fullscreen-graphics layout-column';
     @ViewChild('physics') physicsElement: ElementRef;
     world: any;
-
-    infoBoxTitle: string = "Physics JS Bridge";
-    infoBoxBody: string = `Built to demostrate the "Verlet Constraints" capability of
-                            Physics JS, the bridge will break if too much force acts on it.
-                            Clicking the mouse anywhere on the screen will generate a force 
-                            pulling the bridge towards it.`;
 
     ngAfterViewInit():void {
         this.draw();

@@ -1,23 +1,17 @@
-import { Component, ViewChild, ElementRef, AfterViewInit, NgZone, OnDestroy } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit, NgZone, OnDestroy, HostBinding } from '@angular/core';
 
 declare let Physics: any;
 
 @Component({
     selector: 'rr-solar-system',
-    templateUrl: './solar-system.component.html',
-    styleUrls: ['./solar-system.component.scss']
+    templateUrl: './solar-system.component.html'
 })
 
 export class SolarSystemComponent implements AfterViewInit, OnDestroy {
+    @HostBinding('class') hostClass = 'fullscreen-graphics layout-column';
     @ViewChild('physics') physicsElement: ElementRef;
     bodies: number = 0;
     world: any;
-
-    infoBoxTitle: string = "Physics JS Solar System";
-    infoBoxBody: string = `I created this to experiment with the "Newtonian" behavior of the 
-                           Physics JS library.  The idea is to model the formation of a solar system,
-                           with hundreds of small bodies orbiting a central star, and merging to form
-                           larger planets`;
 
     constructor(private zone: NgZone) {}
 

@@ -1,21 +1,16 @@
-import { Component, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit, OnDestroy, HostBinding } from '@angular/core';
 
 declare let Physics: any;
 
 @Component({
     selector: 'rr-particles-two',
-    templateUrl: './particles-two.component.html',
-    styleUrls: ['./particles-two.component.scss']
+    templateUrl: './particles-two.component.html'
 })
 
 export class ParticlesTwoComponent implements AfterViewInit, OnDestroy {
+    @HostBinding('class') hostClass = 'fullscreen-graphics layout-column';
     @ViewChild('physics') physicsElement: ElementRef;
     world: any;
-
-    infoBoxTitle: string = "Physics JS Particles";
-    infoBoxBody: string = `A Physics JS implementation of the HTML Canvas Particles I created 
-                            while learning about canvas.  There are no special interactions available
-                            in this implementation.`;
 
     ngAfterViewInit():void {
         this.draw();

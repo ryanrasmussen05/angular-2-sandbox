@@ -1,21 +1,16 @@
-import { Component, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit, OnDestroy, HostBinding } from '@angular/core';
 
 declare let Physics: any;
 
 @Component({
     selector: 'rr-physics-intro',
-    templateUrl: './physics-intro.component.html',
-    styleUrls: ['./physics-intro.component.scss']
+    templateUrl: './physics-intro.component.html'
 })
 
 export class PhysicsIntroComponent implements AfterViewInit, OnDestroy {
+    @HostBinding('class') hostClass = 'fullscreen-graphics layout-column';
     @ViewChild('physics') physicsElement: ElementRef;
     world: any;
-
-    infoBoxTitle: string = "Physics JS Intro";
-    infoBoxBody: string = `Basic demo of the usage of Physics JS.  Clicking the mouse at any
-                            point on the screen creates an "attractor" that acts like a center 
-                            of gravity to pull particles in.`;
 
     ngAfterViewInit(): void {
         this.draw();
