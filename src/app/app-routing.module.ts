@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { BridgeComponent } from "./sandbox/physics-js/bridge/bridge.component";
 import { CarSimComponent } from "./sandbox/physics-js/car-sim/car-sim-component";
+import { EventPlannerComponent } from './sandbox/d3/event.planner.component';
 import { FireworksComponent } from './sandbox/canvas/fireworks/fireworks.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { MontyHallComponent } from "./sandbox/monty-hall/monty-hall.component";
@@ -17,6 +18,7 @@ const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'home', component: HomepageComponent },
     { path: 'resume', component: ResumeComponent },
+    { path: 'eventPlanner', component: EventPlannerComponent },
     { path: 'sandbox', component: SandboxComponent },
     { path: 'sandbox/fireworks', component: FireworksComponent },
     { path: 'sandbox/particles', component: ParticlesComponent },

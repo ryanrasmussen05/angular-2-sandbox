@@ -15,6 +15,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent }  from './app.component';
 import { BridgeComponent } from "./sandbox/physics-js/bridge/bridge.component";
 import { CarSimComponent } from "./sandbox/physics-js/car-sim/car-sim-component";
+import { EventPlannerComponent } from './sandbox/d3/event.planner.component';
 import { FireworksComponent } from './sandbox/canvas/fireworks/fireworks.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomepageComponent } from './homepage/homepage.component';
@@ -46,6 +47,7 @@ import { StaticContentService } from './static-content/static-content.service';
         AppComponent,
         BridgeComponent,
         CarSimComponent,
+        EventPlannerComponent,
         FireworksComponent,
         FooterComponent,
         HomepageComponent,

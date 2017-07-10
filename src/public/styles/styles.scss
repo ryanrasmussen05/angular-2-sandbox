@@ -6,7 +6,7 @@ body {
   background-image:url('../images/background.jpg');
 }
 
-canvas {
+canvas, svg {
   display: block;
 }
 
@@ -42,6 +42,10 @@ canvas {
 
 .full-width {
   width: 100%;
+}
+
+.full-height {
+  height: 100%;
 }
 
 .text-container {
