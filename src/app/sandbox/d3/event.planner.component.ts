@@ -42,15 +42,21 @@ export class EventPlannerComponent implements AfterViewInit {
             y: Math.round(Math.random() * (this.height - this.radius * 2) + this.radius)
         });
 
-        this.svg.selectAll('circle')
+        //join data to circle elements, set all updating circles to green
+        let updateCircles = this.svg.selectAll('circle')
             .data(this.circles)
-            .enter().append('circle')
+            .style('fill', 'green');
+
+        updateCircles.enter().append('circle')
             .attr('cx', (data: EventPlanner.CircleData) => data.x)
             .attr('cy', (data: EventPlanner.CircleData) => data.y)
             .attr('r', this.radius)
             .style('fill', 'orange')
             .call(drag<SVGCircleElement, EventPlanner.CircleData>()
-                .on('drag', EventPlanner.dragCircleHandler));
+                .on('drag', EventPlanner.dragCircleHandler))
+            //all updated and entering circles stroke black
+            .merge(updateCircles)
+            .style('stroke', 'black');
     }
 
     addRectangle() {
@@ -71,5 +77,23 @@ export class EventPlannerComponent implements AfterViewInit {
             .style('fill', 'purple')
             .call(drag<SVGRectElement, EventPlanner.RectangleData>()
                 .on('drag', EventPlanner.dragRectangleHandler));
+    }
+
+    removeCircle() {
+        this.circles.pop();
+
+        this.svg.selectAll('circle')
+            .data(this.circles)
+            .exit()
+            .remove();
+    }
+
+    removeRectangle() {
+        this.rectangles.pop();
+
+        this.svg.selectAll('rect')
+            .data(this.rectangles)
+            .exit()
+            .remove();
     }
 }
