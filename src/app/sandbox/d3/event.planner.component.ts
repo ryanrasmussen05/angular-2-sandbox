@@ -1,8 +1,5 @@
 import { AfterViewInit, Component, ElementRef, HostBinding, ViewChild } from '@angular/core';
-import * as EventPlanner from './event.planner';
-import { select, Selection } from 'd3-selection';
-import { range } from 'd3-array';
-import { drag } from 'd3-drag';
+import { EventPlannerD3, initEventPlanner } from './event.planner.d3';
 
 @Component({
     selector: 'rr-event-planner',
@@ -11,89 +8,27 @@ import { drag } from 'd3-drag';
 
 export class EventPlannerComponent implements AfterViewInit {
     @HostBinding('class') hostClass = 'fullscreen-graphics layout-column';
-    @ViewChild('d3') svgElement: ElementRef;
+    @ViewChild('d3') svgWrapper: ElementRef;
 
-    circles: EventPlanner.CircleData[] = [];
-    rectangles: EventPlanner.RectangleData[] = [];
-    svg: Selection<SVGElement, {}, HTMLElement, any>;
-
-    width: number;
-    height: number;
-
-    radius: number = 32;
+    eventPlannerD3: EventPlannerD3;
 
     ngAfterViewInit(): void {
-        this.svg = select<SVGElement, {}>('svg');
-        this.width = this.svgElement.nativeElement.offsetWidth;
-        this.height = this.svgElement.nativeElement.offsetHeight;
+        let width = this.svgWrapper.nativeElement.offsetWidth;
+        let height = this.svgWrapper.nativeElement.offsetHeight;
+        this.eventPlannerD3 = initEventPlanner('svg', width, height);
 
-        range(10).map(() => {
-            this.addCircle();
-        });
-
-        range(10).map(() => {
-            this.addRectangle();
-        });
-    }
-
-    addCircle() {
-        this.circles.push({
-            x: Math.round(Math.random() * (this.width - this.radius * 2) + this.radius),
-            y: Math.round(Math.random() * (this.height - this.radius * 2) + this.radius)
-        });
-
-        //join data to circle elements, set all updating circles to green
-        let updateCircles = this.svg.selectAll('circle')
-            .data(this.circles)
-            .style('fill', 'green');
-
-        updateCircles.enter().append('circle')
-            .attr('cx', (data: EventPlanner.CircleData) => data.x)
-            .attr('cy', (data: EventPlanner.CircleData) => data.y)
-            .attr('r', this.radius)
-            .style('fill', 'orange')
-            .call(drag<SVGCircleElement, EventPlanner.CircleData>()
-                .on('drag', EventPlanner.dragCircleHandler))
-            //all updated and entering circles stroke black
-            .merge(updateCircles)
-            .style('stroke', 'black');
+        this.eventPlannerD3.drawMenu();
     }
 
     addRectangle() {
-        this.rectangles.push({
-            x: Math.round(Math.random() * (this.width - this.radius * 2)),
-            y: Math.round(Math.random() * (this.height - this.radius * 2)),
-            height: Math.round(Math.random() * 50),
-            width: Math.round(Math.random() * 50)
-        });
-
-        this.svg.selectAll('rect')
-            .data(this.rectangles)
-            .enter().append('rect')
-            .attr('x', (data: EventPlanner.RectangleData) => data.x)
-            .attr('y', (data: EventPlanner.RectangleData) => data.y)
-            .attr('width', (data: EventPlanner.RectangleData) => data.width)
-            .attr('height', (data: EventPlanner.RectangleData) => data.height)
-            .style('fill', 'purple')
-            .call(drag<SVGRectElement, EventPlanner.RectangleData>()
-                .on('drag', EventPlanner.dragRectangleHandler));
+        this.eventPlannerD3.addRectangle();
     }
 
     removeCircle() {
-        this.circles.pop();
-
-        this.svg.selectAll('circle')
-            .data(this.circles)
-            .exit()
-            .remove();
+        this.eventPlannerD3.removeCircle();
     }
 
     removeRectangle() {
-        this.rectangles.pop();
-
-        this.svg.selectAll('rect')
-            .data(this.rectangles)
-            .exit()
-            .remove();
+        this.eventPlannerD3.removeRectangle();
     }
 }
