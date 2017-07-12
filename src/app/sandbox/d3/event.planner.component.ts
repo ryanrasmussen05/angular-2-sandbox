@@ -20,10 +20,6 @@ export class EventPlannerComponent implements AfterViewInit {
         this.eventPlannerD3.drawMenu();
     }
 
-    addRectangle() {
-        this.eventPlannerD3.addRectangle();
-    }
-
     removeCircle() {
         this.eventPlannerD3.removeCircle();
     }
