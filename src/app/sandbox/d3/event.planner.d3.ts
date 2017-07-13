@@ -68,6 +68,7 @@ export function initEventPlanner(svgElementId: string, width: number, height: nu
             .attr('r', radius)
             .style('fill', 'orange')
             .call(drag<SVGCircleElement, CircleData>()
+                .on('start', raiseToTop)
                 .on('drag', dragCircleHandler))
             //all updated and entering circles stroke black
             .merge(updateCircles)
@@ -94,7 +95,9 @@ export function initEventPlanner(svgElementId: string, width: number, height: nu
             .attr('width', (data: RectangleData) => data.width)
             .attr('height', (data: RectangleData) => data.height)
             .style('fill', 'purple')
+            .style('stroke', 'black')
             .call(drag<SVGRectElement, RectangleData>()
+                .on('start', raiseToTop)
                 .on('drag', dragRectangleHandler));
     }
 
@@ -114,6 +117,10 @@ export function initEventPlanner(svgElementId: string, width: number, height: nu
             .data(rectangles)
             .exit()
             .remove();
+    }
+
+    function raiseToTop() {
+        select(this).raise();
     }
 
     function dragCircleHandler(data: CircleData) {
