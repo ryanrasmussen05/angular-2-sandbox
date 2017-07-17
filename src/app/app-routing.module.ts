@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { BridgeComponent } from "./sandbox/physics-js/bridge/bridge.component";
 import { CarSimComponent } from "./sandbox/physics-js/car-sim/car-sim-component";
-import { EventPlannerComponent } from './sandbox/d3/event.planner.component';
+import { EventPlannerComponent } from './sandbox/d3/eventPlanner/event.planner.component';
 import { FireworksComponent } from './sandbox/canvas/fireworks/fireworks.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { MontyHallComponent } from "./sandbox/monty-hall/monty-hall.component";

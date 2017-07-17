@@ -1,5 +1,7 @@
 import { event, mouse, select } from 'd3-selection';
 import { drag } from 'd3-drag';
+import { CircleData, RectangleData } from './core/data.types';
+import { config } from './core/config';
 
 export interface EventPlannerD3 {
     drawMenu: () => void;
@@ -8,29 +10,19 @@ export interface EventPlannerD3 {
     removeRectangle: () => void;
 }
 
-export interface CircleData {
-    cx: number;
-    cy: number;
-}
-
-export interface RectangleData {
-    x: number;
-    y: number;
-    height: number;
-    width: number;
-}
-
-export function initEventPlanner(svgElementId: string, width: number, height: number): EventPlannerD3 {
+export function initEventPlanner(svgElementId: string, svgWidth: number, svgHeight: number): EventPlannerD3 {
+    let width = svgWidth;
+    let height = svgHeight;
     let svgElement = document.getElementById(svgElementId);
     let svg = select<SVGElement, {}>(svgElementId);
 
     let circles: CircleData[] = [];
     let rectangles: RectangleData[] = [];
 
-    let radius = 32;
-    let padding = 20;
-
     function drawMenu() {
+        let radius = config.menuObjectRadius;
+        let padding = config.menuObjectMargin;
+
         svg.append('circle')
             .classed('menu', true)
             .attr('r', radius).attr('cx', radius + padding).attr('cy', radius + padding)
@@ -49,6 +41,7 @@ export function initEventPlanner(svgElementId: string, width: number, height: nu
     }
 
     function addCircle() {
+        let radius = config.menuObjectRadius; //TODO TEMP
         let mouseEvent = mouse(svgElement);
 
         circles.push({
@@ -76,6 +69,7 @@ export function initEventPlanner(svgElementId: string, width: number, height: nu
     }
 
     function addRectangle() {
+        let radius = config.menuObjectRadius; //TODO TEMP
         let mouseEvent = mouse(svgElement);
 
         rectangles.push({
