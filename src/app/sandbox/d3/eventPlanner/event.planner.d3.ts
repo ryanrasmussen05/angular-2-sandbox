@@ -123,11 +123,27 @@ export function initEventPlanner(svgElementId: string, svgWidth: number, svgHeig
     }
 
     function dragCircleHandler(data: CircleData) {
-        select(this).attr('cx', data.cx = event.x).attr('cy', data.cy = event.y);
+        let circle = select(this);
+        let mouseEvent = mouse(svgElement);
+
+        if (mouseEvent[0] > 0 && mouseEvent[0] < width) {
+            circle.attr('cx', data.cx = event.x);
+        }
+        if (mouseEvent[1] > 0 && mouseEvent[1] < height) {
+            circle.attr('cy', data.cy = event.y);
+        }
     }
 
     function dragRectangleHandler(data: RectangleData) {
-        select(this).attr('x', data.x = event.x).attr('y', data.y = event.y);
+        let rectangle = select(this);
+        let mouseEvent = mouse(svgElement);
+
+        if (mouseEvent[0] > 0 && mouseEvent[0] < width) {
+            rectangle.attr('x', data.x = event.x);
+        }
+        if (mouseEvent[1] > 0 && mouseEvent[1] < height) {
+            rectangle.attr('y', data.y = event.y);
+        }
     }
 
     function moveNewObject() {
