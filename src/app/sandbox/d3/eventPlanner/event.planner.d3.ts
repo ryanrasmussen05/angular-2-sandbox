@@ -4,10 +4,7 @@ import { CircleData, RectangleData } from './core/data.types';
 import { config } from './core/config';
 
 export interface EventPlannerD3 {
-    drawMenu: () => void;
-    addCircle: () => void;
-    removeCircle: () => void;
-    removeRectangle: () => void;
+    initialize: () => void;
 }
 
 export function initEventPlanner(svgElementId: string, svgWidth: number, svgHeight: number): EventPlannerD3 {
@@ -19,25 +16,51 @@ export function initEventPlanner(svgElementId: string, svgWidth: number, svgHeig
     let circles: CircleData[] = [];
     let rectangles: RectangleData[] = [];
 
-    function drawMenu() {
-        let radius = config.menuObjectRadius;
-        let padding = config.menuObjectMargin;
+    function initialize() {
+        select('#initCircle').on('click', initCircle);
+        select('#initRectangle').on('click', initRectangle);
+    }
 
-        svg.append('circle')
-            .classed('menu', true)
-            .attr('r', radius).attr('cx', radius + padding).attr('cy', radius + padding)
-            .style('fill', 'blue')
-            .call(drag<SVGCircleElement, {}>()
-                .on('start', addCircle)
-                .on('drag', dragNewCircleHandler));
+    function initCircle() {
+        let mouseEvent = mouse(document.body);
+        let body = select('body');
 
-        svg.append('rect')
-            .classed('menu', true)
-            .attr('x', padding).attr('y', (radius*2) + (padding*3)).attr('height', radius*2).attr('width', radius*2)
-            .style('fill', 'blue')
-            .call(drag<SVGRectElement, {}>()
-                .on('start', addRectangle)
-                .on('drag', dragNewRectangleHandler));
+        body.on('mousemove', moveNewObject)
+            .append('svg')
+            .classed('new-object', true)
+            .attr('width', config.menuObjectRadius*2)
+            .attr('height', config.menuObjectRadius*2)
+            .style('position', 'absolute')
+            .style('left', (mouseEvent[0] - config.menuObjectRadius) + 'px')
+            .style('top', (mouseEvent[1] - config.menuObjectRadius) + 'px')
+            .append('circle')
+            .attr('r', config.menuObjectRadius)
+            .attr('cx', 0).attr('cy', 0)
+            .style('transform', 'translate(' + config.menuObjectRadius + 'px, ' + config.menuObjectRadius + 'px)')
+            .style('fill', 'pink');
+
+        body.on('mousedown', addNewCircle);
+    }
+
+    function initRectangle() {
+        let mouseEvent = mouse(document.body);
+        let body = select('body');
+
+        body.on('mousemove', moveNewObject)
+            .append('svg')
+            .classed('new-object', true)
+            .attr('width', config.menuObjectRadius*2)
+            .attr('height', config.menuObjectRadius*2)
+            .style('position', 'absolute')
+            .style('left', (mouseEvent[0] - config.menuObjectRadius) + 'px')
+            .style('top', (mouseEvent[1] - config.menuObjectRadius) + 'px')
+            .append('rect')
+            .attr('height', config.menuObjectRadius*2)
+            .attr('width', config.menuObjectRadius*2)
+            .attr('x', 0).attr('y', 0)
+            .style('fill', 'pink');
+
+        body.on('mousedown', addNewRectangle);
     }
 
     function addCircle() {
@@ -95,24 +118,6 @@ export function initEventPlanner(svgElementId: string, svgWidth: number, svgHeig
                 .on('drag', dragRectangleHandler));
     }
 
-    function removeCircle() {
-        circles.pop();
-
-        svg.selectAll('circle:not(.menu)')
-            .data(circles)
-            .exit()
-            .remove();
-    }
-
-    function removeRectangle() {
-        rectangles.pop();
-
-        svg.selectAll('rect:not(.menu)')
-            .data(rectangles)
-            .exit()
-            .remove();
-    }
-
     function raiseToTop() {
         select(this).raise();
     }
@@ -125,29 +130,65 @@ export function initEventPlanner(svgElementId: string, svgWidth: number, svgHeig
         select(this).attr('x', data.x = event.x).attr('y', data.y = event.y);
     }
 
-    function dragNewCircleHandler() {
-        let data: CircleData = select<SVGCircleElement, CircleData>('circle.new')
-            .attr('cx', event.x).attr('cy', event.y)
-            .datum();
+    function moveNewObject() {
+        let mouseEvent = mouse(document.body);
+        let newObject = select('svg.new-object');
 
-        data.cx = event.x;
-        data.cy = event.y;
+        let newPositionX = mouseEvent[0] - (+newObject.attr('width') / 2);
+        let newPositionY = mouseEvent[1] - (+newObject.attr('height') / 2);
+
+        newObject
+            .style('left', newPositionX + 'px')
+            .style('top', newPositionY + 'px')
     }
 
-    function dragNewRectangleHandler() {
-        let rectangle = select<SVGRectElement, RectangleData>('rect.new');
+    function addNewCircle() {
+        select('svg.new-object').remove();
 
-        let rectangleData: RectangleData = rectangle.datum();
-        rectangleData.x = rectangleData.x + event.dx;
-        rectangleData.y = rectangleData.y + event.dy;
+        let body = select('body');
+        body.on('mousemove', null);
+        body.on('mousedown', null);
 
-        rectangle.attr('x', rectangleData.x).attr('y', rectangleData.y);
+        if(isLocationOverSvg(event.clientX, event.clientY)) {
+            addCircle();
+        }
+    }
+
+    function addNewRectangle() {
+        select('svg.new-object').remove();
+
+        let body = select('body');
+        body.on('mousemove', null);
+        body.on('mousedown', null);
+
+        if(isLocationOverSvg(event.clientX, event.clientY)) {
+            addRectangle();
+        }
+    }
+
+    function isLocationOverSvg(x: number, y: number): boolean {
+        let stack: Element[] = [];
+        let found = false;
+        let currentElement;
+
+        do {
+            currentElement = document.elementFromPoint(x, y);
+            stack.push(currentElement);
+            currentElement.classList.add('pointer-events-none');
+            if(currentElement.id === svgElementId) {
+                found = true;
+                break;
+            }
+        } while(currentElement.tagName !== 'HTML');
+
+        stack.forEach((element: Element) => {
+            element.classList.remove('pointer-events-none');
+        });
+
+        return found;
     }
 
     return {
-        drawMenu: drawMenu,
-        addCircle: addCircle,
-        removeCircle: removeCircle,
-        removeRectangle: removeRectangle
+        initialize: initialize
     };
 }

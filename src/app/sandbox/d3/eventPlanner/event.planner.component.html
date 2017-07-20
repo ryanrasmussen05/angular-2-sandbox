@@ -1,9 +1,11 @@
-<div #d3 flex>
-    <svg id="svg" class="full-width full-height"></svg>
-</div>
-<div layout>
-    <button (click)="removeCircle()">Remove Circle</button>
-    <button (click)="removeRectangle()">Remove Rectangle</button>
+<div flex layout>
+    <div class="bgc-grey-900" style="width:200px">
+        <button md-raised-button id="initCircle">Circle</button>
+        <button md-raised-button id="initRectangle">Rectangle</button>
+    </div>
+    <div #d3 flex>
+        <svg id="svg" class="full-width full-height"></svg>
+    </div>
 </div>
 
 <!--<path id="airplane"-->

@@ -17,14 +17,6 @@ export class EventPlannerComponent implements AfterViewInit {
         let height = this.svgWrapper.nativeElement.offsetHeight;
         this.eventPlannerD3 = initEventPlanner('svg', width, height);
 
-        this.eventPlannerD3.drawMenu();
-    }
-
-    removeCircle() {
-        this.eventPlannerD3.removeCircle();
-    }
-
-    removeRectangle() {
-        this.eventPlannerD3.removeRectangle();
+        this.eventPlannerD3.initialize();
     }
 }
