@@ -1,11 +1,14 @@
+export interface Coordinate {
+    x: number;
+    y: number;
+}
+
 export interface CircleData {
-    cx: number;
-    cy: number;
+    location: Coordinate;
 }
 
 export interface RectangleData {
-    x: number;
-    y: number;
+    location: Coordinate;
     height: number;
     width: number;
 }

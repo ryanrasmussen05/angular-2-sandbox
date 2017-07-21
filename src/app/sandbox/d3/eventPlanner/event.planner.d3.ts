@@ -1,5 +1,7 @@
 import { event, mouse, select } from 'd3-selection';
 import { drag } from 'd3-drag';
+import { line } from 'd3-shape';
+import { scaleLinear, ScaleLinear } from 'd3-scale';
 import { CircleData, RectangleData } from './core/data.types';
 import { config } from './core/config';
 
@@ -12,6 +14,7 @@ export function initEventPlanner(svgElementId: string, svgWidth: number, svgHeig
     let height = svgHeight;
     let svgElement = document.getElementById(svgElementId);
     let svg = select<SVGElement, {}>(svgElementId);
+    let scale: ScaleLinear<number, number>;
 
     let circles: CircleData[] = [];
     let rectangles: RectangleData[] = [];
@@ -19,6 +22,21 @@ export function initEventPlanner(svgElementId: string, svgWidth: number, svgHeig
     function initialize() {
         select('#initCircle').on('click', initCircle);
         select('#initRectangle').on('click', initRectangle);
+        drawFloorplan();
+    }
+
+    function drawFloorplan() {
+        let data: [number, number][] = [[0,0],[1200,0],[1200,600],[0,600],[0,0]];
+        setScale(data);
+
+        let floorplanPath = line()
+            .x(function(d) { return scale(d[0]); })
+            .y(function(d) { return scale(d[1]); });
+
+        svg.append('path')
+            .attr('d', floorplanPath(data))
+            .attr('fill', 'none')
+            .style('stroke', 'red');
     }
 
     function initCircle() {
@@ -28,15 +46,15 @@ export function initEventPlanner(svgElementId: string, svgWidth: number, svgHeig
         body.on('mousemove', moveNewObject)
             .append('svg')
             .classed('new-object', true)
-            .attr('width', config.menuObjectRadius*2)
-            .attr('height', config.menuObjectRadius*2)
+            .attr('width', scale(config.menuObjectRadius*2))
+            .attr('height', scale(config.menuObjectRadius*2))
             .style('position', 'absolute')
-            .style('left', (mouseEvent[0] - config.menuObjectRadius) + 'px')
-            .style('top', (mouseEvent[1] - config.menuObjectRadius) + 'px')
+            .style('left', (mouseEvent[0] - scale(config.menuObjectRadius)) + 'px')
+            .style('top', (mouseEvent[1] - scale(config.menuObjectRadius)) + 'px')
             .append('circle')
-            .attr('r', config.menuObjectRadius)
+            .attr('r', scale(config.menuObjectRadius))
             .attr('cx', 0).attr('cy', 0)
-            .style('transform', 'translate(' + config.menuObjectRadius + 'px, ' + config.menuObjectRadius + 'px)')
+            .style('transform', 'translate(' + scale(config.menuObjectRadius) + 'px, ' + scale(config.menuObjectRadius) + 'px)')
             .style('fill', 'pink');
 
         body.on('mousedown', addNewCircle);
@@ -49,14 +67,14 @@ export function initEventPlanner(svgElementId: string, svgWidth: number, svgHeig
         body.on('mousemove', moveNewObject)
             .append('svg')
             .classed('new-object', true)
-            .attr('width', config.menuObjectRadius*2)
-            .attr('height', config.menuObjectRadius*2)
+            .attr('width', scale(config.menuObjectRadius*2))
+            .attr('height', scale(config.menuObjectRadius*2))
             .style('position', 'absolute')
-            .style('left', (mouseEvent[0] - config.menuObjectRadius) + 'px')
-            .style('top', (mouseEvent[1] - config.menuObjectRadius) + 'px')
+            .style('left', (mouseEvent[0] - scale(config.menuObjectRadius)) + 'px')
+            .style('top', (mouseEvent[1] - scale(config.menuObjectRadius)) + 'px')
             .append('rect')
-            .attr('height', config.menuObjectRadius*2)
-            .attr('width', config.menuObjectRadius*2)
+            .attr('height', scale(config.menuObjectRadius*2))
+            .attr('width', scale(config.menuObjectRadius*2))
             .attr('x', 0).attr('y', 0)
             .style('fill', 'pink');
 
@@ -68,8 +86,7 @@ export function initEventPlanner(svgElementId: string, svgWidth: number, svgHeig
         let mouseEvent = mouse(svgElement);
 
         circles.push({
-            cx: mouseEvent[0],
-            cy: mouseEvent[1]
+            location: {x: scale.invert(mouseEvent[0]), y: scale.invert(mouseEvent[1])}
         });
 
         let updateCircles = svg.selectAll('circle:not(.menu)')
@@ -79,9 +96,9 @@ export function initEventPlanner(svgElementId: string, svgWidth: number, svgHeig
 
         updateCircles.enter().append('circle')
             .classed('new', true)
-            .attr('cx', (data: CircleData) => data.cx)
-            .attr('cy', (data: CircleData) => data.cy)
-            .attr('r', radius)
+            .attr('cx', (data: CircleData) => scale(data.location.x))
+            .attr('cy', (data: CircleData) => scale(data.location.y))
+            .attr('r', scale(radius))
             .style('fill', 'orange')
             .call(drag<SVGCircleElement, CircleData>()
                 .on('start', raiseToTop)
@@ -96,8 +113,10 @@ export function initEventPlanner(svgElementId: string, svgWidth: number, svgHeig
         let mouseEvent = mouse(svgElement);
 
         rectangles.push({
-            x: mouseEvent[0] - radius,
-            y: mouseEvent[1] - radius,
+            location: {
+                x: scale.invert(mouseEvent[0] - scale(radius)),
+                y: scale.invert(mouseEvent[1] - scale(radius))
+            },
             height: radius*2,
             width: radius*2
         });
@@ -107,10 +126,10 @@ export function initEventPlanner(svgElementId: string, svgWidth: number, svgHeig
             .classed('new', false)
             .enter().append('rect')
             .classed('new', true)
-            .attr('x', (data: RectangleData) => data.x)
-            .attr('y', (data: RectangleData) => data.y)
-            .attr('width', (data: RectangleData) => data.width)
-            .attr('height', (data: RectangleData) => data.height)
+            .attr('x', (data: RectangleData) => scale(data.location.x))
+            .attr('y', (data: RectangleData) => scale(data.location.y))
+            .attr('width', (data: RectangleData) => scale(data.width))
+            .attr('height', (data: RectangleData) => scale(data.height))
             .style('fill', 'purple')
             .style('stroke', 'black')
             .call(drag<SVGRectElement, RectangleData>()
@@ -127,10 +146,12 @@ export function initEventPlanner(svgElementId: string, svgWidth: number, svgHeig
         let mouseEvent = mouse(svgElement);
 
         if (mouseEvent[0] > 0 && mouseEvent[0] < width) {
-            circle.attr('cx', data.cx = event.x);
+            circle.attr('cx', event.x);
+            data.location.x = scale.invert(event.x);
         }
         if (mouseEvent[1] > 0 && mouseEvent[1] < height) {
-            circle.attr('cy', data.cy = event.y);
+            circle.attr('cy', event.y);
+            data.location.y = scale.invert(event.y);
         }
     }
 
@@ -139,11 +160,15 @@ export function initEventPlanner(svgElementId: string, svgWidth: number, svgHeig
         let mouseEvent = mouse(svgElement);
 
         if (mouseEvent[0] > 0 && mouseEvent[0] < width) {
-            rectangle.attr('x', data.x = event.x);
+            rectangle.attr('x', event.x);
+            data.location.x = scale.invert(event.x);
         }
         if (mouseEvent[1] > 0 && mouseEvent[1] < height) {
-            rectangle.attr('y', data.y = event.y);
+            rectangle.attr('y', event.y);
+            data.location.y = scale.invert(event.y);
         }
+
+        console.log(data.location);
     }
 
     function moveNewObject() {
@@ -202,6 +227,33 @@ export function initEventPlanner(svgElementId: string, svgWidth: number, svgHeig
         });
 
         return found;
+    }
+
+    function setScale(data: [number, number][]) {
+        let domain;
+        let range;
+
+        let maxX = data.reduce((currentMax, currentData) => {
+            if (currentData[0] > currentMax) return currentData[0];
+            return currentMax;
+        }, 0);
+
+        let maxY = data.reduce((currentMax, currentData) => {
+            if (currentData[1] > currentMax) return currentData[1];
+            return currentMax;
+        }, 0);
+
+        let ratioX = width / maxX;
+
+        if (maxY * ratioX > height) {
+            domain = [0, maxY];
+            range = [0, height];
+        } else {
+            domain = [0, maxX];
+            range = [0, width];
+        }
+
+        scale = scaleLinear().domain(domain).range(range);
     }
 
     return {
