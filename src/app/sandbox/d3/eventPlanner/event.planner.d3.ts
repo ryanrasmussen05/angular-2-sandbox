@@ -82,11 +82,13 @@ export function initEventPlanner(svgElementId: string, svgWidth: number, svgHeig
     }
 
     function addCircle() {
-        let radius = config.menuObjectRadius; //TODO TEMP
         let mouseEvent = mouse(svgElement);
 
         circles.push({
-            location: {x: scale.invert(mouseEvent[0]), y: scale.invert(mouseEvent[1])}
+            location: {x: scale.invert(mouseEvent[0]), y: scale.invert(mouseEvent[1])},
+            radius: config.menuObjectRadius, //TODO TEMP
+            x: mouseEvent[0],
+            y: mouseEvent[1]
         });
 
         let updateCircles = svg.selectAll('circle:not(.menu)')
@@ -98,7 +100,7 @@ export function initEventPlanner(svgElementId: string, svgWidth: number, svgHeig
             .classed('new', true)
             .attr('cx', (data: CircleData) => scale(data.location.x))
             .attr('cy', (data: CircleData) => scale(data.location.y))
-            .attr('r', scale(radius))
+            .attr('r', (data: CircleData) => scale(data.radius))
             .style('fill', 'orange')
             .call(drag<SVGCircleElement, CircleData>()
                 .on('start', raiseToTop)
@@ -118,7 +120,9 @@ export function initEventPlanner(svgElementId: string, svgWidth: number, svgHeig
                 y: scale.invert(mouseEvent[1] - scale(radius))
             },
             height: radius*2,
-            width: radius*2
+            width: radius*2,
+            x: mouseEvent[0] - scale(radius),
+            y: mouseEvent[1] - scale(radius)
         });
 
         svg.selectAll('rect:not(.menu)')
@@ -146,11 +150,11 @@ export function initEventPlanner(svgElementId: string, svgWidth: number, svgHeig
         let mouseEvent = mouse(svgElement);
 
         if (mouseEvent[0] > 0 && mouseEvent[0] < width) {
-            circle.attr('cx', event.x);
+            circle.attr('cx', data.x = event.x);
             data.location.x = scale.invert(event.x);
         }
         if (mouseEvent[1] > 0 && mouseEvent[1] < height) {
-            circle.attr('cy', event.y);
+            circle.attr('cy', data.y = event.y);
             data.location.y = scale.invert(event.y);
         }
     }
@@ -160,15 +164,13 @@ export function initEventPlanner(svgElementId: string, svgWidth: number, svgHeig
         let mouseEvent = mouse(svgElement);
 
         if (mouseEvent[0] > 0 && mouseEvent[0] < width) {
-            rectangle.attr('x', event.x);
+            rectangle.attr('x', data.x = event.x);
             data.location.x = scale.invert(event.x);
         }
         if (mouseEvent[1] > 0 && mouseEvent[1] < height) {
-            rectangle.attr('y', event.y);
+            rectangle.attr('y', data.y = event.y);
             data.location.y = scale.invert(event.y);
         }
-
-        console.log(data.location);
     }
 
     function moveNewObject() {

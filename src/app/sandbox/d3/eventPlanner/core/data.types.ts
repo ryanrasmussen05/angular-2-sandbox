@@ -1,14 +1,20 @@
-export interface Coordinate {
+interface Coordinate {
     x: number;
     y: number;
 }
 
-export interface CircleData {
+interface DraggableObject {
     location: Coordinate;
+    //x and y are needed for drag to work properly
+    x: number;
+    y: number;
 }
 
-export interface RectangleData {
-    location: Coordinate;
+export interface CircleData extends DraggableObject {
+    radius: number;
+}
+
+export interface RectangleData extends DraggableObject {
     height: number;
     width: number;
 }
