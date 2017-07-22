@@ -85,6 +85,7 @@ export function initEventPlanner(svgElementId: string, svgWidth: number, svgHeig
         let mouseEvent = mouse(svgElement);
 
         circles.push({
+            id: generateGuid(),
             location: {x: scale.invert(mouseEvent[0]), y: scale.invert(mouseEvent[1])},
             radius: config.menuObjectRadius, //TODO TEMP
             x: mouseEvent[0],
@@ -92,7 +93,7 @@ export function initEventPlanner(svgElementId: string, svgWidth: number, svgHeig
         });
 
         let updateCircles = svg.selectAll('circle:not(.menu)')
-            .data(circles)
+            .data(circles, (data: CircleData) => data.id)
             .classed('new', false)
             .style('fill', 'green');
 
@@ -115,6 +116,7 @@ export function initEventPlanner(svgElementId: string, svgWidth: number, svgHeig
         let mouseEvent = mouse(svgElement);
 
         rectangles.push({
+            id: generateGuid(),
             location: {
                 x: scale.invert(mouseEvent[0] - scale(radius)),
                 y: scale.invert(mouseEvent[1] - scale(radius))
@@ -126,7 +128,7 @@ export function initEventPlanner(svgElementId: string, svgWidth: number, svgHeig
         });
 
         svg.selectAll('rect:not(.menu)')
-            .data(rectangles)
+            .data(rectangles, (data: RectangleData) => data.id)
             .classed('new', false)
             .enter().append('rect')
             .classed('new', true)
@@ -256,6 +258,14 @@ export function initEventPlanner(svgElementId: string, svgWidth: number, svgHeig
         }
 
         scale = scaleLinear().domain(domain).range(range);
+    }
+
+    function generateGuid() {
+        function _p8(s: boolean) {
+            let p = (Math.random().toString(16)+"000000000").substr(2,8);
+            return s ? "-" + p.substr(0,4) + "-" + p.substr(4,4) : p ;
+        }
+        return _p8(false) + _p8(true) + _p8(true) + _p8(false);
     }
 
     return {

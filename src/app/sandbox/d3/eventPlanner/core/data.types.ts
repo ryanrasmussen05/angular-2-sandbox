@@ -4,6 +4,7 @@ interface Coordinate {
 }
 
 interface DraggableObject {
+    id: string;
     location: Coordinate;
     //x and y are needed for drag to work properly
     x: number;
