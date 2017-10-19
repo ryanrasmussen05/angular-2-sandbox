@@ -1,4 +1,4 @@
-<div layout layout-align="start center" class="pad bgc-dark-grey-B15 tc-grey-50">
+<div class="flex justify-start items-center">
     <!--<md-checkbox [(ngModel)]="gravity" class="push-right-lg">Gravity</md-checkbox>-->
     <!--<md-checkbox [(ngModel)]="collisions" class="push-right-lg">Collisions</md-checkbox>-->
     <!--<md-select [(ngModel)]="orbs">-->
@@ -9,6 +9,6 @@
         <!--<md-option value="50" (click)="setOrbs('50')">50 Orbs</md-option>-->
     <!--</md-select>-->
 </div>
-<div #canvasWrapper flex>
+<div #canvasWrapper class="flex-auto">
     <canvas #canvas></canvas>
 </div>

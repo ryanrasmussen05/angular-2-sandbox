@@ -1,13 +1,13 @@
-<div layout="column" class="fullscreen">
-        <div flex layout layout-align="space-between center">
-            <h1>Ryan Rasmussen</h1>
-            <div>
-                <button routerLink="/home" routerLinkActive="active-link">Home</button>
-                <button routerLink="/resume" routerLinkActive="active-link">Resume</button>
-                <button routerLink="/sandbox" routerLinkActive="active-link">Sandbox</button>
-            </div>
+<div class="fullscreen flex flex-column">
+    <div class="flex-auto flex justify-between items-center">
+        <h1>Ryan Rasmussen</h1>
+        <div>
+            <button routerLink="/home" routerLinkActive="active-link">Home</button>
+            <button routerLink="/resume" routerLinkActive="active-link">Resume</button>
+            <button routerLink="/sandbox" routerLinkActive="active-link">Sandbox</button>
         </div>
-    <div flex class="scroll">
+    </div>
+    <div class="scroll flex-auto">
         <router-outlet></router-outlet>
     </div>
 </div>

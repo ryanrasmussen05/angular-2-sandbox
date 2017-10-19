@@ -1,20 +1,20 @@
-<div class="text-center bgc-dark-grey-B15 tc-grey-50 pad-xl">
-    <h1 class="md-display-2 push-top-none">Ryan Rasmussen</h1>
-    <h1 class="md-headline push-none">Software Engineer</h1>
-    <h1 class="md-subhead push-none">Papillion, Nebraska</h1>
-    <div class="pad">
-        <a class="bgc-blue-400 push-right-sm" href="http://www.linkedin.com/in/ryanrasmussen05" target="_blank">
+<div class="center">
+    <h1>Ryan Rasmussen</h1>
+    <h1>Software Engineer</h1>
+    <h1>Papillion, Nebraska</h1>
+    <div>
+        <a href="http://www.linkedin.com/in/ryanrasmussen05" target="_blank">
             LinkedIn
         </a>
-        <a class="tc-grey-900" href="https://github.com/ryanrasmussen05" target="_blank">
+        <a href="https://github.com/ryanrasmussen05" target="_blank">
             GitHub
         </a>
     </div>
 </div>
 
-<div class="text-container push-top-lg">
+<div class="text-container">
     <h2>About</h2>
-    <div class="push-bottom-sm">
+    <div>
         I am a full-stack web developer and an Android developer in my spare time.  I built this site using
         <b>Angular 2 with TypeScript</b>, <b>Covalent UI</b>, and <b>Webpack</b>
          as a way to stay up-to-date on the latest browser technologies, and as a sandbox for learning to use various libraries.
@@ -22,7 +22,7 @@
     <a routerLink="/resume">Resume</a>
 </div>
 
-<div class="divider push-top-xl push-bottom-xl"></div>
+<div class="divider"></div>
 
 <img class="image medium centered" src="../../public/images/rhino_logo-teal.png">
 
@@ -32,29 +32,29 @@
         I publish apps to Google Play under the developer name <b>Rhino Development</b>.
         I currently have two apps in the store, and a couple more in progress.
     </div>
-    <div layout class="push-top-lg" *ngFor="let androidApp of androidApps">
+    <div class="flex" *ngFor="let androidApp of androidApps">
         <a href="{{androidApp.url}}" target="_blank">
             <img class="image small" [src]="getImage(androidApp.image)">
         </a>
-        <div flex class="pad-left-lg pad-right-lg">
-            <a class="md-title standard-link" href="{{androidApp.url}}" target="_blank">{{androidApp.title}}</a>
-            <div class="description">
+        <div class="flex-auto">
+            <a class="standard-link" href="{{androidApp.url}}" target="_blank">{{androidApp.title}}</a>
+            <div>
                 <p>{{androidApp.description}}</p>
             </div>
         </div>
     </div>
 </div>
 
-<div class="divider push-top-xl push-bottom-xl"></div>
+<div class="divider"></div>
 
 <div class="text-container">
     <h2>Sandbox</h2>
-    <div class="push-bottom-sm">
+    <div>
         This is the area I use to store various components I create while learning new/interesting libraries.
     </div>
     <a routerLink="/sandbox">Sandbox</a>
 </div>
 
-<div class="push-top-xxl">
+<div>
     <rr-footer></rr-footer>
 </div>
