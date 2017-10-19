@@ -14,7 +14,7 @@ interface PhysicsNormal {
 })
 
 export class ParticlesComponent implements AfterViewInit, OnDestroy {
-    @HostBinding('class') hostClass = 'fullscreen-graphics flex-column';
+    @HostBinding('class') hostClass = 'fullscreen-graphics flex flex-column';
     @ViewChild('canvas') canvasElement: ElementRef;
     @ViewChild('canvasWrapper') canvasWrapperElement: ElementRef;
 

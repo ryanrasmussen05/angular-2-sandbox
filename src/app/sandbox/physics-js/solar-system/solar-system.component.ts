@@ -8,7 +8,7 @@ declare let Physics: any;
 })
 
 export class SolarSystemComponent implements AfterViewInit, OnDestroy {
-    @HostBinding('class') hostClass = 'fullscreen-graphics layout-column';
+    @HostBinding('class') hostClass = 'fullscreen-graphics flex flex-column';
     @ViewChild('physics') physicsElement: ElementRef;
     bodies: number = 0;
     world: any;
