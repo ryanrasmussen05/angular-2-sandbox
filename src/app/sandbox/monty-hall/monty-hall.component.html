@@ -1,8 +1,8 @@
 <div layout layout-align="start center" class="pad bgc-dark-grey-B15 tc-grey-50">
-    <button md-raised-button color="accent" (click)="initializeTests(false)" class="push-right">Run 'Stick' Test</button>
-    <button md-raised-button color="accent" (click)="initializeTests(true)">Run 'Switch' Test</button>
+    <button (click)="initializeTests(false)" class="push-right">Run 'Stick' Test</button>
+    <button (click)="initializeTests(true)">Run 'Switch' Test</button>
     <div flex></div>
-    <button md-raised-button color="warn" (click)="initializeGame()">Reset</button>
+    <button (click)="initializeGame()">Reset</button>
 </div>
 
 <div class="text-center">
@@ -32,14 +32,14 @@
 
 <div class="text-center push-top-lg" *ngIf="!runningTest">
     <h1 class="md-display-1" *ngIf="gameState === 'initial'">Choose a door</h1>
-    <button md-raised-button color="accent" (click)="openRandomLoser()" *ngIf="gameState === 'openLoser'">
+    <button (click)="openRandomLoser()" *ngIf="gameState === 'openLoser'">
         Open A Losing Door
     </button>
     <div *ngIf="gameState === 'stickOrSwitch'">
-        <button md-raised-button color="accent" class="push-right" (click)="switchDoor(false)">{{ 'Stick With Door ' + selectedDoor }}</button>
-        <button md-raised-button color="accent" (click)="switchDoor(true)">{{ 'Switch To Door ' + getOtherAvailableDoor() }}</button>
+        <button class="push-right" (click)="switchDoor(false)">{{ 'Stick With Door ' + selectedDoor }}</button>
+        <button (click)="switchDoor(true)">{{ 'Switch To Door ' + getOtherAvailableDoor() }}</button>
     </div>
-    <button md-raised-button color="accent" (click)="finishGame()" *ngIf="gameState === 'reveal'">Reveal</button>
+    <button (click)="finishGame()" *ngIf="gameState === 'reveal'">Reveal</button>
     <h1 class="md-display-1" *ngIf="gameState === 'gameOver'">{{ finishText }}</h1>
     <div *ngIf="gameState === 'testCompleted'">
         <span class="md-display-1">

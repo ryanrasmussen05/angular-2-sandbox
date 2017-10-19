@@ -1,5 +1,3 @@
-@import './covalent';
-
 $toolbar-height: 64px;
 
 body {
@@ -88,9 +86,4 @@ a.standard-link {
   &:hover {
     color: royalblue;
   }
-}
-
-[md-button].active-link {
-  color: $accentColor;
-  border-bottom: 1px solid $accentColor;
 }

@@ -4,12 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import { CovalentLayoutModule } from '@covalent/core';
-import {
-    MdButtonModule, MdCardModule, MdCheckboxModule, MdIconModule, MdSelectModule,
-    MdToolbarModule
-} from '@angular/material';
-
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent }  from './app.component';
@@ -32,15 +26,8 @@ import { StaticContentService } from './static-content/static-content.service';
         AppRoutingModule,
         BrowserAnimationsModule,
         BrowserModule,
-        CovalentLayoutModule,
         FormsModule,
-        HttpModule,
-        MdButtonModule,
-        MdCardModule,
-        MdCheckboxModule,
-        MdIconModule,
-        MdSelectModule,
-        MdToolbarModule
+        HttpModule
     ],
     declarations: [
         AppComponent,
