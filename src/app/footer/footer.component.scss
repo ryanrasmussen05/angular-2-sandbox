@@ -1,7 +1,18 @@
-.footer-image-wrapper {
-  width: 800px;
-}
+@import "../../public/styles/variables";
 
-.footer-image img {
-  width: 150px;
-}
+.footer {
+   background-color: $menu-bar-color;
+
+   .footer-image-wrapper {
+     width: 800px;
+   }
+
+   .footer-image img {
+     width: 150px;
+     max-height: 150px;
+   }
+
+  .copyright {
+    color: white;
+  }
+ }
