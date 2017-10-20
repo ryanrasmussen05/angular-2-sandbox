@@ -8,7 +8,7 @@ declare let Physics: any;
 })
 
 export class ParticlesTwoComponent implements AfterViewInit, OnDestroy {
-    @HostBinding('class') hostClass = 'fullscreen-graphics flex flex-column';
+    @HostBinding('class') hostClass = 'full-width full-height block';
     @ViewChild('physics') physicsElement: ElementRef;
     world: any;
 
