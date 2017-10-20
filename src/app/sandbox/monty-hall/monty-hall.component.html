@@ -41,7 +41,7 @@
     </div>
     <button class="button mt4" (click)="finishGame()" *ngIf="gameState === 'reveal'">Reveal</button>
     <h1 *ngIf="gameState === 'gameOver'">{{ finishText }}</h1>
-    <div *ngIf="gameState === 'testCompleted'">
+    <div *ngIf="gameState === 'testCompleted'" class="mt4">
         <span>
             {{ 'Won: ' + winners }}
         </span>
@@ -51,6 +51,6 @@
     </div>
 </div>
 
-<div class="wide-container">
+<div class="wide-container mt4">
     <span class="test-output {{result}} inline-block mr2" *ngFor="let result of testOutputs">{{result | uppercase}}</span>
 </div>
