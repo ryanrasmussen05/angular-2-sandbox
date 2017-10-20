@@ -1,7 +1,8 @@
 @import "../public/styles/variables";
 
-.top-bar {
+.menu-bar {
   height: $menu-bar-height;
+  background-color: $menu-bar-color;
 
   .page-title {
     color: $menu-bar-title-color;
