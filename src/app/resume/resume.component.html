@@ -1,58 +1,58 @@
-<div class="center">
+<div class="center mb4">
     <h1>Employment</h1>
 </div>
 
 <div class="text-container">
     <div *ngFor="let resumeItem of resumeItems; let last = last">
         <div class="flex">
-            <div class="small image">
+            <div class="flex-none small image">
                 <img class="full-width" [src]="getImage(resumeItem.image)">
             </div>
-            <div class="flex-auto">
-                <div>{{resumeItem.jobTitle}}</div>
-                <div>
+            <div class="flex-auto ml3">
+                <div class="size-20 weight-500">{{resumeItem.jobTitle}}</div>
+                <div class="size-16">
                     <span><b>{{resumeItem.company}}</b></span>
                     <span>{{resumeItem.location}}</span>
                 </div>
-                <div>
+                <div class="size-12">
                     {{resumeItem.startDate + " - " + resumeItem.endDate}}
                 </div>
-                <ul>
+                <ul class="size-14">
                     <li *ngFor="let bullet of resumeItem.bullets">
                         {{bullet}}
                     </li>
                 </ul>
             </div>
         </div>
-        <div *ngIf="!last" class="divider"></div>
+        <div *ngIf="!last" class="divider my3"></div>
     </div>
 </div>
 
-<div class="center">
+<div class="center my4">
     <h1>Education</h1>
 </div>
 
 <div class="text-container">
     <div *ngFor="let educationItem of educationItems; let last = last">
         <div class="flex">
-            <div class="small image">
+            <div class="flex-none small image">
                 <img class="full-width" [src]="getImage(educationItem.image)">
             </div>
-            <div class="flex-auto">
-                <div>{{educationItem.degree + ", " + educationItem.minor}}</div>
-                <div>
+            <div class="flex-auto ml3">
+                <div class="size-20 weight-500">{{educationItem.degree + ", " + educationItem.minor}}</div>
+                <div class="size-16">
                     <span><b>{{educationItem.school}}</b></span>
                 </div>
-                <div>
+                <div class="size-12">
                     {{educationItem.location}}
                 </div>
-                <ul>
+                <ul class="size-14">
                     <li class="item">{{"Graduated " + educationItem.graduationDate}}</li>
                     <li class="item">{{"GPA: " + educationItem.gpa}}</li>
                 </ul>
             </div>
         </div>
-        <div *ngIf="!last" class="divider"></div>
+        <div *ngIf="!last" class="divider my3"></div>
     </div>
 </div>
 
