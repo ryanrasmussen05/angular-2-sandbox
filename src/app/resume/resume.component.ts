@@ -6,7 +6,8 @@ import { StaticContentService } from '../static-content/static-content.service';
 
 @Component({
     selector: 'rr-resume',
-    templateUrl: './resume.component.html'
+    templateUrl: './resume.component.html',
+    styleUrls: ['./resume.component.scss']
 })
 
 export class ResumeComponent implements OnInit {

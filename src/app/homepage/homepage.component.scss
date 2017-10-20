@@ -1,5 +1,9 @@
 @import '../../public/styles/variables';
 
+:host {
+  display: block;
+}
+
 .banner {
   background-color: $home-page-banner-color;
   color: white;

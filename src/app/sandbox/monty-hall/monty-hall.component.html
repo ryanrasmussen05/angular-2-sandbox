@@ -1,12 +1,12 @@
-<div class="flex justify-start items-center">
-    <button (click)="initializeTests(false)">Run 'Stick' Test</button>
-    <button (click)="initializeTests(true)">Run 'Switch' Test</button>
+<div class="flex justify-start items-center p1">
+    <button class="button mr1" (click)="initializeTests(false)">Run 'Stick' Test</button>
+    <button class="button" (click)="initializeTests(true)">Run 'Switch' Test</button>
     <div class="flex-auto"></div>
-    <button (click)="initializeGame()">Reset</button>
+    <button class="button secondary" (click)="initializeGame()">Reset</button>
 </div>
 
 <div class="center">
-    <h1>Monty Hall Paradox</h1>
+    <h1 class="m0 mt2 mb4">Monty Hall Paradox</h1>
 </div>
 
 <div class="text-container flex justify-between items-center">
@@ -31,15 +31,15 @@
 </div>
 
 <div class="center" *ngIf="!runningTest">
-    <h1 *ngIf="gameState === 'initial'">Choose a door</h1>
-    <button (click)="openRandomLoser()" *ngIf="gameState === 'openLoser'">
+    <div *ngIf="gameState === 'initial'" class="size-24 weight-400 mt4">Choose a door</div>
+    <button class="button mt4" (click)="openRandomLoser()" *ngIf="gameState === 'openLoser'">
         Open A Losing Door
     </button>
-    <div *ngIf="gameState === 'stickOrSwitch'">
-        <button (click)="switchDoor(false)">{{ 'Stick With Door ' + selectedDoor }}</button>
-        <button (click)="switchDoor(true)">{{ 'Switch To Door ' + getOtherAvailableDoor() }}</button>
+    <div *ngIf="gameState === 'stickOrSwitch'" class="mt4">
+        <button class="button mr1" (click)="switchDoor(false)">{{ 'Stick With Door ' + selectedDoor }}</button>
+        <button class="button" (click)="switchDoor(true)">{{ 'Switch To Door ' + getOtherAvailableDoor() }}</button>
     </div>
-    <button (click)="finishGame()" *ngIf="gameState === 'reveal'">Reveal</button>
+    <button class="button mt4" (click)="finishGame()" *ngIf="gameState === 'reveal'">Reveal</button>
     <h1 *ngIf="gameState === 'gameOver'">{{ finishText }}</h1>
     <div *ngIf="gameState === 'testCompleted'">
         <span>
@@ -52,5 +52,5 @@
 </div>
 
 <div class="wide-container">
-    <span class="test-output {{result}} inline-block" *ngFor="let result of testOutputs">{{result | uppercase}}</span>
+    <span class="test-output {{result}} inline-block mr2" *ngFor="let result of testOutputs">{{result | uppercase}}</span>
 </div>

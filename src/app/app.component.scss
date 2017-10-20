@@ -1,5 +1,11 @@
 @import "../public/styles/variables";
 
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 .menu-bar {
   height: $menu-bar-height;
   background-color: $menu-bar-color;

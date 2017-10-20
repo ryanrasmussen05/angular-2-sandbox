@@ -1,5 +1,9 @@
 @import "../../public/styles/variables";
 
+:host {
+  display: block;
+}
+
 .footer {
    background-color: $menu-bar-color;
 

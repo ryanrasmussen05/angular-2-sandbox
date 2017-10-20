@@ -9,7 +9,7 @@ import { Particle } from "./particle";
 })
 
 export class FireworksComponent implements AfterViewInit, OnDestroy {
-    @HostBinding('class') hostClass = 'fullscreen-graphics';
+    @HostBinding('class') hostClass = 'full-width full-height block';
     @ViewChild('canvas') canvasElement: ElementRef;
 
     canvas: HTMLCanvasElement;
