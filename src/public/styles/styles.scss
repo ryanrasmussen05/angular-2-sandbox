@@ -1,6 +1,9 @@
-@import "~basscss/css/basscss.css";
+@import "~basscss/css/basscss-important.css";
+@import "foundation";
 
-$toolbar-height: 64px;
+html, input, select, button {
+  font-family: RobotoDraft, Roboto, "Helvetica Neue", sans-serif;
+}
 
 body {
   background-image:url('../images/background.jpg');
@@ -20,14 +23,11 @@ canvas {
 
 .fullscreen-graphics {
   position: absolute;
-  top: $toolbar-height;
+  //top: $toolbar-height;
+  top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-}
-
-.scroll {
-  overflow: auto;
 }
 
 .full-width {
