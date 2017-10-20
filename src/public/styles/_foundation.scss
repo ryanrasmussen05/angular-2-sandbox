@@ -2,4 +2,5 @@
 @import 'settings';
 
 @include foundation-button();
-@include foundation-top-bar();
+@include foundation-switch();
+@include foundation-form-select();

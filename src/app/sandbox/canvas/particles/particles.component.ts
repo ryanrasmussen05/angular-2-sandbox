@@ -25,7 +25,7 @@ export class ParticlesComponent implements AfterViewInit, OnDestroy {
     screenHeight: number;
 
     gravity: boolean = false;
-    collisions: boolean = false;
+    collisions: boolean = true;
     orbs: string = "30";
 
     particles: Particle[];
@@ -127,17 +127,8 @@ export class ParticlesComponent implements AfterViewInit, OnDestroy {
         });
     }
 
-    toggleGravity(): void {
-        this.gravity = !this.gravity;
-    }
-
-    toggleCollisions(): void {
-        this.collisions = !this.collisions;
-    }
-
-    setOrbs(orbs: string): void {
+    setOrbs(): void {
         clearInterval(this.intervalId);
-        this.orbs = orbs;
         this.particles = [];
         this.initCanvas();
     }

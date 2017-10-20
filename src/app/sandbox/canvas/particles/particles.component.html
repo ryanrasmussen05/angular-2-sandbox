@@ -1,13 +1,28 @@
-<div class="flex-none flex justify-start items-center">
-    <!--<md-checkbox [(ngModel)]="gravity" class="push-right-lg">Gravity</md-checkbox>-->
-    <!--<md-checkbox [(ngModel)]="collisions" class="push-right-lg">Collisions</md-checkbox>-->
-    <!--<md-select [(ngModel)]="orbs">-->
-        <!--<md-option value="10" (click)="setOrbs('10')">10 Orbs</md-option>-->
-        <!--<md-option value="20" (click)="setOrbs('20')">20 Orbs</md-option>-->
-        <!--<md-option value="30" (click)="setOrbs('30')">30 Orbs</md-option>-->
-        <!--<md-option value="40" (click)="setOrbs('40')">40 Orbs</md-option>-->
-        <!--<md-option value="50" (click)="setOrbs('50')">50 Orbs</md-option>-->
-    <!--</md-select>-->
+<div class="particle-controls flex-none flex justify-start items-center p1">
+    <div class="flex items-center mr3">
+        <div class="switch mr1">
+            <input class="switch-input" id="gravitySwitch" type="checkbox" name="gravitySwitch" [(ngModel)]="gravity">
+            <label class="switch-paddle" for="gravitySwitch"></label>
+        </div>
+        <label for="gravitySwitch">Gravity</label>
+    </div>
+
+    <div class="flex items-center mr3">
+        <div class="switch mr1">
+            <input class="switch-input" id="collisionsSwitch" type="checkbox" name="collisionsSwitch" [(ngModel)]="collisions">
+            <label class="switch-paddle" for="collisionsSwitch"></label>
+        </div>
+        <label for="collisionsSwitch">Collisions</label>
+    </div>
+
+    <select [(ngModel)]="orbs" (change)="setOrbs()" class="m0">
+        <option value="10">10 Orbs</option>
+        <option value="20">20 Orbs</option>
+        <option value="30">30 Orbs</option>
+        <option value="40">40 Orbs</option>
+        <option value="50">50 Orbs</option>
+    </select>
+
 </div>
 <div #canvasWrapper class="flex-auto" style="background-color: black">
     <canvas #canvas></canvas>
