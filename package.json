@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Ryan's Angular2 Website",
   "scripts": {
-    "clean": "rimraf build",
+    "clean": "rimraf dist",
     "prebuild:dev": "npm run clean",
     "prebuild:prod": "npm run clean",
     "build:dev": "webpack",
