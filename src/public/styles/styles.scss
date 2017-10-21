@@ -1,5 +1,6 @@
-@import "~basscss/css/basscss-important.css";
 @import "foundation";
+@import "basscss";
+@import "variables";
 @import "../font/foundation-icons.css";
 
 html, input, select, button {
@@ -12,7 +13,7 @@ html, body {
 }
 
 body {
-  background-image:url('../images/background.jpg');
+  background-image: url('../images/background.jpg');
   margin: 0;
 }
 
@@ -43,6 +44,8 @@ canvas {
   line-height: 1.5;
   margin-left: auto;
   margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .wide-container {
@@ -65,7 +68,7 @@ canvas {
   margin-right: auto;
 }
 
-.image {
+img {
   &.small {
     width: 150px;
     height: auto;
@@ -81,5 +84,32 @@ a.standard-link {
   text-decoration: underline;
   &:hover {
     color: royalblue;
+  }
+}
+
+.image-text-container {
+  @extend .flex;
+
+  @media (max-width: $media-breakpoint) {
+    -webkit-box-orient: vertical !important;
+    -webkit-box-direction: normal !important;
+    -webkit-flex-direction: column !important;
+    -ms-flex-direction: column !important;
+    flex-direction: column !important;
+  }
+
+  .image {
+    @extend .flex-none;
+    @extend .centered;
+    margin-right: 20px;
+
+    @media (max-width: $media-breakpoint) {
+      margin-right: auto;
+      margin-bottom: 20px;
+    }
+  }
+
+  .text {
+    @extend .flex-auto;
   }
 }

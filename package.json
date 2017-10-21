@@ -22,7 +22,6 @@
     "@angular/platform-browser": "4.4.6",
     "@angular/platform-browser-dynamic": "4.4.6",
     "@angular/router": "4.4.6",
-    "basscss": "^8.0.3",
     "core-js": "2.5.1",
     "foundation-sites": "6.4.3",
     "physicsjs": "0.7.0",

@@ -32,11 +32,14 @@
         I publish apps to Google Play under the developer name <b>Rhino Development</b>.
         I currently have two apps in the store, and a couple more in progress.
     </div>
-    <div class="flex my3" *ngFor="let androidApp of androidApps">
-        <a href="{{androidApp.url}}" target="_blank">
-            <img class="image small" [src]="getImage(androidApp.image)">
-        </a>
-        <div class="flex-auto ml3">
+
+    <div class="image-text-container my3" *ngFor="let androidApp of androidApps">
+        <div class="image">
+            <a href="{{androidApp.url}}" target="_blank">
+                <img class="small" [src]="getImage(androidApp.image)">
+            </a>
+        </div>
+        <div class="text">
             <a class="standard-link" href="{{androidApp.url}}" target="_blank">{{androidApp.title}}</a>
             <div>
                 <p>{{androidApp.description}}</p>
