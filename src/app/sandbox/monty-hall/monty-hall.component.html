@@ -1,8 +1,11 @@
-<div class="flex justify-start items-center p1">
-    <button class="button mr1" (click)="initializeTests(false)">Run 'Stick' Test</button>
-    <button class="button" (click)="initializeTests(true)">Run 'Switch' Test</button>
-    <div class="flex-auto"></div>
-    <button class="button secondary" (click)="initializeGame()">Reset</button>
+<div class="flex flex-wrap justify-start items-center p1">
+    <div class="flex-auto">
+        <button class="button mr1 mb1" (click)="initializeTests(false)">Run 'Stick' Test</button>
+        <button class="button mb1" (click)="initializeTests(true)">Run 'Switch' Test</button>
+    </div>
+    <div class="flex-none mb1">
+        <button class="button secondary" (click)="initializeGame()">Reset</button>
+    </div>
 </div>
 
 <div class="center">
@@ -11,19 +14,19 @@
 
 <div class="text-container flex justify-between items-center">
     <div class="door relative" [class.open]="isDoorOpen(1)" [class.selected]="selectedDoor === 1" (click)="doorClick(1)">
-        <img class="small image" [src]="getImage(1)">
+        <img class="small" [src]="getImage(1)">
         <div class="cover flex justify-center items-center">
             1
         </div>
     </div>
     <div class="door relative" [class.open]="isDoorOpen(2)" [class.selected]="selectedDoor === 2" (click)="doorClick(2)">
-        <img class="small image" [src]="getImage(2)">
+        <img class="small" [src]="getImage(2)">
         <div class="cover flex justify-center items-center">
             2
         </div>
     </div>
     <div class="door relative" [class.open]="isDoorOpen(3)" [class.selected]="selectedDoor === 3" (click)="doorClick(3)">
-        <img class="small image" [src]="getImage(3)">
+        <img class="small" [src]="getImage(3)">
         <div class="cover flex justify-center items-center">
             3
         </div>

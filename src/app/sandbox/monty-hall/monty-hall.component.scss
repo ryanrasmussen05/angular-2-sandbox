@@ -1,3 +1,5 @@
+@import '../../../public/styles/variables';
+
 :host {
   display: block;
 }
@@ -26,6 +28,12 @@
 
   &.selected {
     box-shadow: orange 0 0 11px 5px;
+  }
+
+  @media (max-width: $media-breakpoint) {
+    img {
+      width: 75px;
+    }
   }
 }
 
