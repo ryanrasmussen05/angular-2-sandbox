@@ -26,7 +26,7 @@ export class ParticlesComponent implements AfterViewInit, OnDestroy {
 
     gravity: boolean = false;
     collisions: boolean = true;
-    orbs: string = "30";
+    orbs: string = '30';
 
     particles: Particle[];
 

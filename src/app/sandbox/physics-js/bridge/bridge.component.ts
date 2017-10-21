@@ -32,7 +32,7 @@ export class BridgeComponent implements AfterViewInit, OnDestroy {
         let bottomThreshold = 0.9;
 
         let bridgeSpacing = 50;
-        let bridgeLength = Math.floor((width - 400) / bridgeSpacing);
+        let bridgeLength = Math.floor((width - 100) / bridgeSpacing);
 
         let bridgeLineStyle = {
             strokeStyle: '#000000',
@@ -67,7 +67,7 @@ export class BridgeComponent implements AfterViewInit, OnDestroy {
         let bridgeLevelOne = [];
         for(let i = 0; i < bridgeLength; i++) {
             bridgeNode = Physics.body('circle', {
-                x: 200 + (i * bridgeSpacing),
+                x: 50 + (i * bridgeSpacing),
                 y: height / 2,
                 radius: 1,
                 mass: 0.5,
@@ -80,7 +80,7 @@ export class BridgeComponent implements AfterViewInit, OnDestroy {
         let bridgeLevelTwo = [];
         for(let i = 0; i < bridgeLength; i++) {
             bridgeNode = Physics.body('circle', {
-                x: 200 + (i * bridgeSpacing),
+                x: 50 + (i * bridgeSpacing),
                 y: height / 2 + bridgeSpacing,
                 radius: 1,
                 mass: 1,
