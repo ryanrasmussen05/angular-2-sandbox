@@ -9,11 +9,20 @@
 
    .footer-image-wrapper {
      width: 800px;
+
+     @media (max-width: $media-breakpoint) {
+       width: 100%;
+     }
    }
 
    .footer-image img {
      width: 150px;
      max-height: 150px;
+
+     @media (max-width: $media-breakpoint) {
+       width: 75px;
+       max-height: 75px;
+     }
    }
 
   .copyright {
