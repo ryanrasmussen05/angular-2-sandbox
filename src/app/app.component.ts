@@ -9,4 +9,14 @@ import '../public/styles/styles.scss';
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+    showMenu: boolean = false;
+
+    toggleMenu(event: MouseEvent) {
+        this.showMenu = !this.showMenu;
+        event.stopPropagation();
+    }
+
+    hideMenu() {
+        this.showMenu = false;
+    }
 }
