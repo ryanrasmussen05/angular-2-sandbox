@@ -4,9 +4,11 @@
         <div>
             <div class="button dropdown-button relative mr2" (click)="toggleMenu($event)">
                 <div><i class="fi-list size-20"></i></div>
-                <div *ngIf="showMenu" class="dropdown-content size-24">
+                <div *ngIf="showMenu" class="dropdown-content size-24 weight-500">
                     <div class="p2" routerLink="/home">Home</div>
+                    <div class="divider"></div>
                     <div class="p2" routerLink="/resume">Resume</div>
+                    <div class="divider"></div>
                     <div class="p2" routerLink="/sandbox">Sandbox</div>
                 </div>
             </div>
