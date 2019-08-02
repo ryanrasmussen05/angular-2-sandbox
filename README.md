@@ -1,19 +1,21 @@
 # Angular 2 Sandbox Website
 
-##Install Instructions:
-* npm install
+Original Angular profile website, manual webpack config, no longer maintained
 
-##Run Development Server:
-* npm start
+## Install Instructions:
+* `npm install`
 
-##Development Build
-* npm run build:dev
+## Run Development Server:
+* `npm start`
 
-##Production Build *(/dist folder)*:
-* npm run build:prod
+## Development Build
+* `npm run build:dev`
+
+## Production Build *(/dist folder)*:
+* `npm run build:prod`
 
 
-##Deploy to Firebase
-* npm install -g firebase-tools
-* firebase login
-* firebase deploy
+## Deploy to Firebase
+* `npm install -g firebase-tools`
+* `firebase login`
+* `firebase deploy`
